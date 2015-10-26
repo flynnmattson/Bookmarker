@@ -1,0 +1,16 @@
+{
+  "manifest_version": 2,
+
+  "name": "Bookmarker",
+  "description": "This extension gives you the capability of sending bookmarks directly to other Google users as well as publishing them on a live feed.",
+  "version": "1.0",
+
+  "browser_action": {
+    "default_icon": "./src/images/bull-icon.png",
+    "default_popup": "./src/html/popup.html"
+  },
+  "permissions": [
+    "activeTab",
+    "https://ajax.googleapis.com/"
+  ]
+}
