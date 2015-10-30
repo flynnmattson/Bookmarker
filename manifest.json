@@ -11,6 +11,7 @@
   },
   "permissions": [
     "activeTab",
+    "bookmarks",
     "https://ajax.googleapis.com/"
   ]
 }

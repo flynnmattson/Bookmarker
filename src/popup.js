@@ -1,6 +1,49 @@
-// Copyright (c) 2014 The Chromium Authors. All rights reserved.
-// Use of this source code is governed by a BSD-style license that can be
-// found in the LICENSE file.
+
+var app = angular.module('bookmarker', ['ngRoute', 'firebase'])
+
+.controller('BookmarkerController', function($scope, $firebaseAuth, $firebaseArray) {
+    var ref = new Firebase("https://thebookmarker.firebaseio.com/");
+    //var auth = $firebaseAuth(ref);
+    $scope.bookmarks = [];
+
+    $scope.createUser = function() {
+      ref.createUser({
+        email    : $scope.user.email,
+        password : $scope.user.password
+      }, function(error, userData) {
+        if (error) {
+          console.log("Error creating user:", error);
+        } else {
+          console.log("Successfully created user account with uid:", userData.uid);
+        }
+      });
+    };
+
+    //$scope.bookmarks = $firebaseArray(ref);
+    $scope.addBookmark = function() {
+      $scope.bookmarks.push({
+        url: 'www.blah.com'
+      });
+    }
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// JUST LEAVING THIS STUFF HERE IN CASE WE FIND ANY OF IT USEFUL....
+
 
 /**
  * Get the current URL.
