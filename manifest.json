@@ -6,12 +6,17 @@
   "version": "1.0",
 
   "browser_action": {
-    "default_icon": "./src/images/bull-icon.png",
-    "default_popup": "./src/html/popup.html"
+    "default_icon": {
+      "19": "./src/images/default-icon/default-icon_19x19.png",
+      "38": "./src/images/default-icon/default-icon_38x38.png"
+    },
+    "default_popup": "./src/login.html"
   },
+
   "permissions": [
     "activeTab",
-    "bookmarks",
-    "https://ajax.googleapis.com/"
+    "http://*/*",
+    "https://*/*",
+    "https://de-bookmarker.firebaseio.com/"
   ]
 }
