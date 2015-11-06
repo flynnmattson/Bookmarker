@@ -1,3 +1,9 @@
+html {
+    background-image: url("../images/background.png");
+    background-color: black;
+    margin: 7px 7px 7px 7px;
+}
+
 body {
     background-image: url("../images/background.png");
     background-color: black;
