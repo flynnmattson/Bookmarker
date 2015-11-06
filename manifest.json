@@ -4,6 +4,7 @@
   "name": "Bookmarker",
   "description": "This extension gives you the capability of sending bookmarks directly to other Google users as well as publishing them on a live feed.",
   "version": "1.0",
+  "content_security_policy": "script-src 'self' https://cdn.firebase.com https://*.firebaseio.com; object-src 'self'",
 
   "browser_action": {
     "default_icon": {
