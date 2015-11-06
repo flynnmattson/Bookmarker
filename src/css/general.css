@@ -18,6 +18,38 @@ body {
   text-align: center;
 }
 
-.btn-fifty {
+.btn-fullSize {
+  width: 100%;
+}
+
+.btn-halfSize {
   width: 50%;
+}
+
+.btn-size49 {
+  width: 49%;
+}
+
+.btn-signin {
+  background-color: rgb(200, 0, 0);;
+  border-color: gray;
+  color: white;
+}
+
+.btn-google {
+  background-color: rgb(60, 60, 60);;
+  border-color: gray;
+  color: white;
+  width: 49%;
+}
+
+.btn-facebook {
+  background-color: rgb(0, 100, 150);;
+  border-color: gray;
+  color: white;
+}
+
+.btn-margin2 {
+  margin-bottom: 2px;
+  margin-top: 2px;
 }

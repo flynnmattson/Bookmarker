@@ -10,7 +10,6 @@
     <script src="scripts/libs/angular-animate.js"></script>
     <script src="scripts/libs/jquery-2.1.4.min.js"></script>
     <script src="scripts/libs/ui-bootstrap-tpls-0.14.3.min.js"></script>
-
     <script src="scripts/app.js"></script>
 
     <link href="css/bootstrap.min.css" rel="stylesheet">
@@ -32,6 +31,8 @@
 
           <form class="form-group" ng-submit="createAccount()">
             <input type="text" class="form-control" ng-model="name" placeholder="Full name"/>
+            <input type="text" class="form-control" ng-model="username" placeholder="Username"/>
+
             <input type="text" class="form-control" ng-model="email" placeholder="Email address"/>
 
             <div class="row">
