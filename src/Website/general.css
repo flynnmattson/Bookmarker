@@ -32,18 +32,23 @@ h1 {
 .bookmarkerheader-container {
   text-align:left;
   margin-bottom:0px;
-  width: 600px;
+  width: 500px;
   background-color: rgba(255, 255, 255, 0);
   float:left;
 }
 
 .navbar-container {
   float:left;
-  text-align:left;
-  margin-left:0px;
-  margin-top: 53px;
+  text-align:right;
+  margin-left:-30px;
+  margin-top: 30px;
   margin-bottom:0px;
+  margin-right: 25px;
   background-color: rgba(255, 255, 255, 0);
+}
+
+.navbar-container a{
+  text-decoration: none;
 }
 
 .h5-narrow {
