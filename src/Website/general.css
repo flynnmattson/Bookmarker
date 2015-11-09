@@ -10,12 +10,40 @@ body {
     margin: 7px 7px 7px 7px;
 }
 
+h1 {
+  color: rgba(255, 255, 255, 0.85);
+  font-family: "Harrington";
+  font-size: 50px;
+  padding-bottom: 0px;
+  padding-left: 100px;
+}
+
 .body-container {
+  clear:left;
   background-color: rgba(255, 255, 255, 0.85);
-  margin-left: auto;
+  margin-left: 0px;
   margin-right: auto;
-  padding: 1px 15px 1px 15px;
-  width: 300px;
+  margin-top: 0px;
+  padding: 0px 0px 0px 0px;
+  width: 1400px;
+  height: 1100px;
+}
+
+.bookmarkerheader-container {
+  text-align:left;
+  margin-bottom:0px;
+  width: 600px;
+  background-color: rgba(255, 255, 255, 0);
+  float:left;
+}
+
+.navbar-container {
+  float:left;
+  text-align:left;
+  margin-left:0px;
+  margin-top: 53px;
+  margin-bottom:0px;
+  background-color: rgba(255, 255, 255, 0);
 }
 
 .h5-narrow {
