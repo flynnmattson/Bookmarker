@@ -16,6 +16,8 @@
 
   "permissions": [
     "activeTab",
+    "bookmarks",
+    "tabs",
     "http://*/*",
     "https://*/*"
   ]

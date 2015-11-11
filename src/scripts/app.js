@@ -1,6 +1,5 @@
 
 var app = angular.module('Bookmarker', ['ngRoute', 'ngAnimate', 'ui.bootstrap', 'firebase']);
-
 app.factory('Auth', ['$firebaseAuth',
   function($firebaseAuth) {
     var ref = new Firebase('https://de-bookmarker.firebaseio.com/');
@@ -114,29 +113,56 @@ app.controller('RegisterCtrl', ['$scope', 'Auth',
   }
 ]);
 
-app.controller('AccordionDemoCtrl', function ($scope) {
-  $scope.oneAtATime = true;
+app.controller('AccordionDemoCtrl', ['$scope',
+    function ($scope) {
+      $scope.oneAtATime = true;
 
-  $scope.groups = [
-    {
-      title: 'Dynamic Group Header - 1',
-      content: 'Dynamic Group Body - 1'
-    },
-    {
-      title: 'Dynamic Group Header - 2',
-      content: 'Dynamic Group Body - 2'
+      // Gives you the URL of the current tab on the browser.
+      chrome.tabs.getSelected(null, function(tab){
+        $scope.currentTab = tab.url;
+      });
+
+      // Creates a new tab in the browser.
+      $scope.createTab = function() {
+        console.log('starting to create tab...');
+        chrome.tabs.create({"url":"./","selected":true}
+
+        if (!isInt(args.windowId))
+          delete args.windowId;
+        if (!isInt(args.index))
+          delete args.index;
+
+        try {
+          chrome.tabs.create(args);
+          console.log('it worked!');
+        } catch (e) {
+          alert(e);
+          console.log('it didnt work');
+        }
+      };
+
+
+      $scope.groups = [
+        {
+          title: 'Dynamic Group Header - 1',
+          content: 'Dynamic Group Body - 1'
+        },
+        {
+          title: 'Dynamic Group Header - 2',
+          content: 'Dynamic Group Body - 2'
+        }
+      ];
+
+      $scope.items = ['Item 1', 'Item 2', 'Item 3'];
+
+      $scope.addItem = function() {
+        var newItemNo = $scope.items.length + 1;
+        $scope.items.push('Item ' + newItemNo);
+      };
+
+      $scope.status = {
+        isFirstOpen: true,
+        isFirstDisabled: false
+      };
     }
-  ];
-
-  $scope.items = ['Item 1', 'Item 2', 'Item 3'];
-
-  $scope.addItem = function() {
-    var newItemNo = $scope.items.length + 1;
-    $scope.items.push('Item ' + newItemNo);
-  };
-
-  $scope.status = {
-    isFirstOpen: true,
-    isFirstDisabled: false
-  };
-});
+]);

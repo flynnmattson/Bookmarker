@@ -14,7 +14,8 @@
     <link href="css/general.css" rel="stylesheet">
   </head>
   <body>
-    <div ng-controller="AccordionDemoCtrl">
+    <h1 align="center">Bookmarker</h1>
+    <div ng-app="Bookmarker" ng-controller="AccordionDemoCtrl">
       <script type="text/ng-template" id="group-template.html">
         <div class="panel {{panelClass || 'panel-default'}}">
           <div class="panel-heading">
@@ -30,40 +31,31 @@
       </script>
 
       <p>
-        <button type="button" class="btn btn-default btn-sm" ng-click="status.open = !status.open">Toggle last panel</button>
-        <button type="button" class="btn btn-default btn-sm" ng-click="status.isFirstDisabled = ! status.isFirstDisabled">Enable / Disable first panel</button>
+        <!--<button type="button" class="btn btn-default btn-sm" ng-click="status.open = !status.open">Toggle last panel</button>
+        <button type="button" class="btn btn-default btn-sm" ng-click="status.isFirstDisabled = ! status.isFirstDisabled">Enable / Disable first panel</button>-->
       </p>
 
-      <div class="checkbox">
+      <!--<div class="checkbox">
         <label>
           <input type="checkbox" ng-model="oneAtATime">
           Open only one at a time
         </label>
-      </div>
+      </div>-->
       <uib-accordion close-others="oneAtATime">
-        <uib-accordion-group heading="Static Header, initially expanded" is-open="status.isFirstOpen" is-disabled="status.isFirstDisabled">
-          This content is straight in the template.
+        <uib-accordion-group heading="Live Feed" is-open="false">
+          <uib-accordion-heading>
+            Live Feed <i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': status.open, 'glyphicon-chevron-right': !status.open}"></i>
+          </uib-accordion-heading>
+          Your Live feeds go here...
         </uib-accordion-group>
-        <uib-accordion-group heading="{{group.title}}" ng-repeat="group in groups">
-          {{group.content}}
+        <uib-accordion-group heading="Inbox" is-open="false">
+          Your Inbox of bookmarks are here...
+          <button type="button" class="btn btn-default btn-sm" ng-click="createTab()">CREATE A NEW TAB!</button>
         </uib-accordion-group>
-        <uib-accordion-group heading="Dynamic Body Content">
-          <p>The body of the uib-accordion group grows to fit the contents</p>
+        <uib-accordion-group heading="My Bookmarks" is-open="true">
+          Each bookmark will go here.
           <button type="button" class="btn btn-default btn-sm" ng-click="addItem()">Add Item</button>
           <div ng-repeat="item in items">{{item}}</div>
-        </uib-accordion-group>
-        <uib-accordion-group heading="Custom template" template-url="group-template.html">
-          Hello
-        </uib-accordion-group>
-        <uib-accordion-group heading="Delete account" panel-class="panel-danger">
-          <p>Please, to delete your account, click the button below</p>
-          <button class="btn btn-danger">Delete</button>
-        </uib-accordion-group>
-        <uib-accordion-group is-open="status.open">
-          <uib-accordion-heading>
-            I can have markup, too! <i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': status.open, 'glyphicon-chevron-right': !status.open}"></i>
-          </uib-accordion-heading>
-          This is just some content to illustrate fancy headings.
         </uib-accordion-group>
       </uib-accordion>
     </div>
