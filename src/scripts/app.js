@@ -1,4 +1,4 @@
-
+var t;
 var app = angular.module('Bookmarker', ['ngRoute', 'ngAnimate', 'ui.bootstrap', 'firebase']);
 app.factory('Auth', ['$firebaseAuth',
   function($firebaseAuth) {
@@ -115,6 +115,7 @@ app.controller('RegisterCtrl', ['$scope', 'Auth',
 
 app.controller('AccordionDemoCtrl', ['$scope',
     function ($scope) {
+      t = $scope;
       $scope.oneAtATime = true;
 
       // Gives you the URL of the current tab on the browser.
@@ -151,5 +152,9 @@ app.controller('AccordionDemoCtrl', ['$scope',
         isFirstOpen: true,
         isFirstDisabled: false
       };
+
+      chrome.bookmarks.getTree(function(tree) {
+        $scope.bookmarks = tree.children;
+      });
     }
 ]);
