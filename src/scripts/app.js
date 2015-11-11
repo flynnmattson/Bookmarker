@@ -125,20 +125,7 @@ app.controller('AccordionDemoCtrl', ['$scope',
       // Creates a new tab in the browser.
       $scope.createTab = function() {
         console.log('starting to create tab...');
-        chrome.tabs.create({"url":"./","selected":true}
-
-        if (!isInt(args.windowId))
-          delete args.windowId;
-        if (!isInt(args.index))
-          delete args.index;
-
-        try {
-          chrome.tabs.create(args);
-          console.log('it worked!');
-        } catch (e) {
-          alert(e);
-          console.log('it didnt work');
-        }
+        chrome.tabs.create({"url":"www.google.com","selected":true});
       };
 
 
