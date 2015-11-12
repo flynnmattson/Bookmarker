@@ -12,7 +12,7 @@
     <script src="scripts/libs/ui-bootstrap-tpls-0.14.3.min.js"></script>
     <script src="scripts/app.js"></script>
 
-    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/bootstrap.css" rel="stylesheet">
     <link href="css/general.css" rel="stylesheet">
 
   </head>
@@ -25,23 +25,28 @@
 
       <div ng-app="Bookmarker" ng-controller="RegisterCtrl">
 
+          <!-- Alerts -->
           <div ng-if="alerts">
             <uib-alert ng-repeat="alert in alerts" type="{{alert.type}}" close="closeAlert($index)">{{alert.msg}}</uib-alert>
           </div>
 
+          <!-- Registration form -->
           <form class="form-group" ng-submit="createAccount()">
             <input type="text" class="form-control" ng-model="name" placeholder="Full name"/>
-            <input type="text" class="form-control" ng-model="username" placeholder="Username"/>
-
             <input type="text" class="form-control" ng-model="email" placeholder="Email address"/>
 
             <div class="row">
               <div class="col-xs-9">
-                <input type="password" class="form-control" ng-model="password" placeholder="Password"/>
+                <input type="password" class="form-control" ng-model="password" placeholder="New password"/>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-xs-9">
+                <input type="password" class="form-control" ng-model="repassword" placeholder="Re-enter your password"/>
               </div>
             </div>
 
-            <br>
+            <br />
             <div align="right">
               <button type="button" class="btn btn-default" ng-click="cancel()">Cancel</button>
               <button type="submit" class="btn btn-success">Create Account</button>

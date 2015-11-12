@@ -13,9 +13,18 @@ body {
   width: 300px;
 }
 
+.footer-container {
+  background-color: rgba(60, 60, 60, 0.85);
+  margin-left: auto;
+  margin-right: auto;
+  padding: 7px 15px 7px 15px;
+  width: 300px;
+  color: white;
+}
+
 .h5-narrow {
-  font-family: "Arial Narrow", Tahoma;
-  font-size: 16px;
+  font-family: Helvetica, Tahoma;
+  font-size: 13px;
   text-align: center;
 }
 
@@ -31,21 +40,34 @@ body {
   width: 49%;
 }
 
+.btn-search {
+  background-color: rgb(0, 150, 200);
+  color: white;
+}
+
+.btn-signout {
+  background-color: rgba(0, 0, 0, 0.0);
+  border: 0px;
+  color: white;
+  padding: 2px 4px 2px 4px;
+  margin: 0px 0px 0px 0px;
+}
+
 .btn-signin {
-  background-color: rgb(200, 0, 0);;
+  background-color: rgb(200, 0, 0);
   border-color: gray;
   color: white;
 }
 
 .btn-google {
-  background-color: rgb(60, 60, 60);;
+  background-color: rgb(60, 60, 60);
   border-color: gray;
   color: white;
   width: 49%;
 }
 
 .btn-facebook {
-  background-color: rgb(0, 100, 150);;
+  background-color: rgb(0, 100, 150);
   border-color: gray;
   color: white;
 }

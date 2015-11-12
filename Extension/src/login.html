@@ -12,8 +12,7 @@
     <script src="scripts/libs/ui-bootstrap-tpls-0.14.3.min.js"></script>
     <script src="scripts/app.js"></script>
 
-
-    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/bootstrap.css" rel="stylesheet">
     <link href="css/general.css" rel="stylesheet">
 
   </head>
@@ -26,10 +25,12 @@
 
       <div ng-app="Bookmarker" ng-controller="LoginCtrl">
 
+          <!-- Alerts -->
           <div ng-if="alerts">
             <uib-alert ng-repeat="alert in alerts" type="{{alert.type}}" close="closeAlert($index)">{{alert.msg}}</uib-alert>
           </div>
 
+          <!-- Login form -->
           <form class="form-group" ng-submit="Login()" >
 
             <input type="text" class="form-control" ng-model="email" placeholder="example@bookmarker.com"/>
@@ -40,11 +41,11 @@
               </div>
             </div>
 
-            <br>
+            <br />
             <div align="center">
               <button type="submit" class="btn btn-danger btn-fullSize btn-margin2 btn-signin">Sign In</button>
-              <button type="button" class="btn btn-default btn-size49 btn-margin2 btn-google">Google</button>
-              <button type="button" class="btn btn-primary btn-size49 btn-margin2 btn-facebook">Facebook</button>
+              <!-- <button type="button" class="btn btn-default btn-size49 btn-margin2 btn-google">Google</button>
+              <button type="button" class="btn btn-primary btn-size49 btn-margin2 btn-facebook">Facebook</button> -->
             </div>
 
           </form>

@@ -11,12 +11,13 @@
       "19": "./src/images/default-icon/default-icon_19x19.png",
       "38": "./src/images/default-icon/default-icon_38x38.png"
     },
-    "default_popup": "./src/login.html"
+    "default_popup": "./src/home-screen.html"
   },
 
   "permissions": [
     "activeTab",
     "bookmarks",
+    "storage",
     "tabs",
     "http://*/*",
     "https://*/*"
