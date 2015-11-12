@@ -20,7 +20,7 @@
   <body>
 
     <div ng-app="Bookmarker" ng-controller="HomeScreenCtrl">
-      <div class="body-container">
+      <div class="body-container home-container">
         <br />
 
         <!-- Search form -->
@@ -52,7 +52,7 @@
 
           <uib-accordion close-others="false">
             <!-- My Subscriptions -->
-            <uib-accordion-group is-open="my_subscriptions.open">
+            <uib-accordion-group panel-class="panel-my-subscriptions"  is-open="my_subscriptions.open">
               <uib-accordion-heading ng-click="my_subscriptions.open = !my_subscriptions.open">
                 My Subscriptions <i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': my_subscriptions.open, 'glyphicon-chevron-right': !my_subscriptions.open}"></i>
               </uib-accordion-heading>
@@ -60,7 +60,7 @@
             </uib-accordion-group>
 
             <!-- Shared With Me -->
-            <uib-accordion-group is-open="shared_with_me.open">
+            <uib-accordion-group panel-class="panel-shared-with-me" is-open="shared_with_me.open">
               <uib-accordion-heading ng-click="shared_with_me.open = !shared_with_me.open">
                 Shared With Me <i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': shared_with_me.open, 'glyphicon-chevron-right': !shared_with_me.open}"></i>
               </uib-accordion-heading>
@@ -68,7 +68,7 @@
             </uib-accordion-group>
 
             <!-- My Bookmarks -->
-            <uib-accordion-group is-open="my_bookmarks.open">
+            <uib-accordion-group panel-class="panel-my-bookmarks" is-open="my_bookmarks.open">
               <uib-accordion-heading ng-click="my_bookmarks.open = !my_bookmarks.open">
                 My Bookmarks <i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': my_bookmarks.open, 'glyphicon-chevron-right': !my_bookmarks.open}"></i>
               </uib-accordion-heading>

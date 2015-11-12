@@ -1,6 +1,7 @@
 body {
+    font-family: Helvetica, Tahoma;
     background-image: url("../images/background.png");
-    background-color: black;
+    background-color: white;
     margin: 7px 7px 7px 7px;
     min-width:300px;
 }
@@ -13,17 +14,36 @@ body {
   width: 300px;
 }
 
+.home-container {
+    width: 350px;
+}
+
 .footer-container {
+  font-family: Helvetica, Tahoma;
   background-color: rgba(60, 60, 60, 0.85);
   margin-left: auto;
   margin-right: auto;
   padding: 7px 15px 7px 15px;
-  width: 300px;
+  width: 100%;
+  color: white;
+}
+
+.panel-my-subscriptions > .panel-heading {
+  background-color: rgb(0, 140, 190);
+  color: white;
+}
+
+.panel-shared-with-me > .panel-heading {
+  background-color: rgb(150, 150, 0);
+  color: white;
+}
+
+.panel-my-bookmarks > .panel-heading {
+  background-color: rgb(170, 45, 0);
   color: white;
 }
 
 .h5-narrow {
-  font-family: Helvetica, Tahoma;
   font-size: 13px;
   text-align: center;
 }
@@ -41,7 +61,7 @@ body {
 }
 
 .btn-search {
-  background-color: rgb(0, 150, 200);
+  background-color: rgb(60, 60, 60);
   color: white;
 }
 
