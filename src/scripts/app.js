@@ -1,9 +1,13 @@
-var t;
 var app = angular.module('Bookmarker', ['ngRoute', 'ngAnimate', 'ui.bootstrap', 'firebase']);
 app.factory('Auth', ['$firebaseAuth',
   function($firebaseAuth) {
     var ref = new Firebase('https://de-bookmarker.firebaseio.com/');
     return $firebaseAuth(ref);
+  }
+]);
+app.factory('ref', [
+  function() {
+    return new Firebase('https://de-bookmarker.firebaseio.com/');
   }
 ]);
 
@@ -113,9 +117,8 @@ app.controller('RegisterCtrl', ['$scope', 'Auth',
   }
 ]);
 
-app.controller('AccordionDemoCtrl', ['$scope',
-    function ($scope) {
-      t = $scope;
+app.controller('AccordionDemoCtrl', ['$scope', 'ref',
+    function ($scope, ref) {
       $scope.oneAtATime = false;
 
       // Gives you the URL of the current tab on the browser.
@@ -124,13 +127,9 @@ app.controller('AccordionDemoCtrl', ['$scope',
       });
 
       // Creates a new tab in the browser.
-      $scope.createTab = function(link) {
-        console.log('starting to create tab...');
+      $scope.createTab = function createTab(link) {
         chrome.tabs.create({"url":link});
       };
-
-
-
 
       $scope.items = [];
 
@@ -139,27 +138,44 @@ app.controller('AccordionDemoCtrl', ['$scope',
         isFirstDisabled: false
       };
 
-      chrome.bookmarks.getTree(function(itemTree){
-        itemTree.forEach(function(item){
-            processNode(item);
+      $scope.linkBookmarks = function() {
+        chrome.bookmarks.getTree(function(itemTree){
+          itemTree.forEach(function(item){
+              //console.log(item);
+              var data = processNode(item);
+              console.log(data);
+              ref.child("users").child("flynn").set(data);
+          });
         });
-      });
 
-      function processNode(node) {
-        // recursively process child nodes
-        if(node.children) {
+        function processNode(node) {
+          // If there is a child then this node is a folder.
+          if(node.children) {
+            var theChildren = []
             node.children.forEach(function(child) {
-               processNode(child);
+               theChildren.push(processNode(child));
             });
-        }
+            return {
+              "id" : node.id,
+              "children" : theChildren,
+              "title" : node.title
+            };
+          }
 
-        // push the items into the $scope var
-        if(node.url) {
-          $scope.items.push({
+          // If there is a url then this node is a bookmarked link.
+          if(node.url) {
+            $scope.items.push({
+                "title" : node.title,
+                "url" : node.url
+            });
+            return {
+              "id" : node.id,
+              "parentId" : node.parentId,
               "title" : node.title,
               "url" : node.url
-          });
+            };
+          }
         }
-      }
+      };
     }
 ]);

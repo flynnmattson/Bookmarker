@@ -49,7 +49,7 @@
           Your Inbox of bookmarks are here...
         </uib-accordion-group>
         <uib-accordion-group heading="My Bookmarks" is-open="true">
-          <!-- <button type="button" class="btn btn-default btn-sm" ng-click="addItem()">Add Item</button> -->
+          <button ng-if="items.length == 0" type="button" class="btn btn-default btn-sm" ng-click="linkBookmarks()">Sync Local Bookmarks!</button>
           <ul ng-repeat="item in items">
             <li>
               <a ng-click="createTab(item.url)">{{item.title}}</a>
