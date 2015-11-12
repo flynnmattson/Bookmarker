@@ -45,14 +45,16 @@
         <uib-accordion-group heading="Live Feed" is-open="false">
           Your Live feeds go here...
         </uib-accordion-group>
-        <uib-accordion-group heading="Inbox" is-open="false">
+        <uib-accordion-group heading="Shared With Me" is-open="false">
           Your Inbox of bookmarks are here...
-          <button type="button" class="btn btn-default btn-sm" ng-click="createTab()">CREATE A NEW TAB!</button>
         </uib-accordion-group>
         <uib-accordion-group heading="My Bookmarks" is-open="true">
-          Each bookmark will go here.
-          <button type="button" class="btn btn-default btn-sm" ng-click="addItem()">Add Item</button>
-          <div ng-repeat="item in items">{{item}}</div>
+          <!-- <button type="button" class="btn btn-default btn-sm" ng-click="addItem()">Add Item</button> -->
+          <ul ng-repeat="item in items">
+            <li>
+              <a ng-click="createTab(item.url)">{{item.title}}</a>
+            </li>
+          </ul>
         </uib-accordion-group>
       </uib-accordion>
     </div>

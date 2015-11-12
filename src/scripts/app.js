@@ -116,7 +116,7 @@ app.controller('RegisterCtrl', ['$scope', 'Auth',
 app.controller('AccordionDemoCtrl', ['$scope',
     function ($scope) {
       t = $scope;
-      $scope.oneAtATime = true;
+      $scope.oneAtATime = false;
 
       // Gives you the URL of the current tab on the browser.
       chrome.tabs.getSelected(null, function(tab){
@@ -124,37 +124,42 @@ app.controller('AccordionDemoCtrl', ['$scope',
       });
 
       // Creates a new tab in the browser.
-      $scope.createTab = function() {
+      $scope.createTab = function(link) {
         console.log('starting to create tab...');
-        chrome.tabs.create({"url":"http://www.youtube.com/watch?v=oHg5SJYRHA0"});
+        chrome.tabs.create({"url":link});
       };
 
 
-      $scope.groups = [
-        {
-          title: 'Dynamic Group Header - 1',
-          content: 'Dynamic Group Body - 1'
-        },
-        {
-          title: 'Dynamic Group Header - 2',
-          content: 'Dynamic Group Body - 2'
-        }
-      ];
 
-      $scope.items = ['Item 1', 'Item 2', 'Item 3'];
 
-      $scope.addItem = function() {
-        var newItemNo = $scope.items.length + 1;
-        $scope.items.push('Item ' + newItemNo);
-      };
+      $scope.items = [];
 
       $scope.status = {
         isFirstOpen: true,
         isFirstDisabled: false
       };
 
-      chrome.bookmarks.getTree(function(tree) {
-        $scope.bookmarks = tree.children;
+      chrome.bookmarks.getTree(function(itemTree){
+        itemTree.forEach(function(item){
+            processNode(item);
+        });
       });
+
+      function processNode(node) {
+        // recursively process child nodes
+        if(node.children) {
+            node.children.forEach(function(child) {
+               processNode(child);
+            });
+        }
+
+        // push the items into the $scope var
+        if(node.url) {
+          $scope.items.push({
+              "title" : node.title,
+              "url" : node.url
+          });
+        }
+      }
     }
 ]);
