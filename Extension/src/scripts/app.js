@@ -194,10 +194,10 @@ app.controller('HomeScreenCtrl', ['$scope', 'Auth', 'ref',
       $scope.linkBookmarks = function() {
         chrome.bookmarks.getTree(function(itemTree){
           itemTree.forEach(function(item){
-              //console.log(item);
+              console.log(item);
               var data = processNode(item);
               console.log(data);
-              ref.child("users").child("flynn").set(data);
+              ref.child("users").child("flynn").push(data);
           });
         });
 
