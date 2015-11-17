@@ -10,31 +10,100 @@
 <!--Title div section-->
     <div class="bookmarkerheader-container">
       <h1>Bookmarker</h1>
+      <a id="Home"></a>
     </div>
 <!--Navigation Bar-->
 <div class="navbar-container">
     <ul>
-      <a href=""><font color="white" style="font-family:Century Gothic" size = "6">Getting Started</font></a>
+      <a href="#GettingStarted"><font color="white" style="font-family:Century Gothic" size = "6">Getting Started</font></a>
     </ul>
   </div>
   <div class="navbar-container">
       <ul>
-        <a href=""><font color="white" style="font-family:Century Gothic" size = "6">Try It Now</font></a>
+        <a href="#HowItWorks"><font color="white" style="font-family:Century Gothic" size = "6">How It Works</font></a>
       </ul>
     </div>
   <div class="navbar-container">
       <ul>
-    <a href=""><font color="white" style="font-family:Century Gothic" size = "6">FAQ</font></a>
+    <a href="#FAQ"><font color="white" style="font-family:Century Gothic" size = "6">FAQ</font></a>
   </ul>
 </div>
 <div class="navbar-container">
     <ul>
-    <a href=""><font color="white" style="font-family:Century Gothic" size = "6">Contact Us</font></a>
+    <a href="#AboutUs"><font color="white" style="font-family:Century Gothic" size = "6">About Us</font></a>
   </ul>
 </div>
+
 <!--Body container displays gray box-->
   <div class="body-container">
-  
+<!--Breakdown of each "page" section-->
+<!--Page 1-->
+<div id="Page1">
+  <a id="GettingStarted"></a>
+  <h2 style="font-family:Century Gothic">Getting Started Page</h2>
+  <a href="#Home" style ="text-decoration:none;font-family:Century Gothic">Go back to top</a>
+</div>
+<!--Page 2-->
+<div id="Page2">
+  <a id="HowItWorks"></a>
+  <h2 style="font-family:Century Gothic">Try It Now</h2>
+  <a href="#Home" style ="text-decoration:none;font-family:Century Gothic">Go back to top</a>
+</div>
+<!--Page 3-->
+<div id="Page3">
+  <a id="FAQ"></a> <!--NEEDS MAJOR STYLE/DESIGN HELP, just getting content onto the page!-->
+  <h2 style="font-family:Century Gothic">FAQ</h2>
+  <dl class="detailedlist-container" style="font-family:Century Gothic">
+    <h4>Getting Started</h4>
+    <dt>I'm not familiar with Google Extensions, how can I get Bookmarker running?</dt>
+    <dd>You can easily download the extension from our website's homepage. The extension is also available from
+      Google Chrome's collection of extensions.</dd>
+
+    <dt>What is a live feed?</dt>
+    <dd>A live feed is a place for you to share and see the latest and hottest links. The live feed is meant
+      to filled with current and interesting links users would like to share with everyone.</dd>
+
+    <dt>What is the difference between adding someone and subscribing to someone?</dt>
+    <dd>When you add someone, you will be able to send links to and receive links from others directly and view each others live feeds.
+      When you subscribe to someone, you will only be able to view their live feed.</dd>
+
+    <h4>Account Management</h4>
+    <dt>How can I manage my account settings from within the extension?</dt>
+    <dd>Unfortunately, users can't currently manage their accounts from within the extension. Our team is working
+      hard to add this feature. For now, you can manage your account by clicking on the settings button at the
+      bottom of the home screen. You will be redirected to the Bookmarker.com website, where you can manage your account.</dd>
+
+    <h4>Editing Bookmarks</h4>
+    <dt>How can I delete multiple links at one time?</dt>
+    <dd>To delete multiple links, simply select the links to be deleted by checking the corresponding boxes and
+        click on the trash can at the bottom of the page.</dd>
+
+    <dt>How can I edit a bookmark?</dt>
+    <dd>Editing bookmarks is easy with Bookmarker. Simply click on the edit button (insert small button image?)
+      corresponding to the bookmark you want to edit. A popup will appear where you can rename the bookmark. </dd>
+  </dl>
+  <a href="#Home" style ="text-decoration:none;font-family:Century Gothic">Go back to top</a>
+</div>
+<!--Page 4-->
+<div id="Page4">
+  <a id="AboutUs"></a>
+  <h2 style="font-family:Century Gothic">About Us</h2>
+  <a href="#Home" style ="text-decoration:none;font-family:Century Gothic">Go back to top</a>
   </div>
+
+
+<!--JQuery Code from site for smooth scrolling....I don't really think it works-->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+<script src="https://github.com/kswedberg/jquery-smooth-scroll/blob/master/jquery.smooth-scroll.min.js"></script>
+<script>
+$('.smooth').on('click', function() {
+  $.smoothScroll({
+      scrollElement: $('body'),
+      scrollTarget: '#' + this.id
+  });
+
+  return false;
+});
+</script>
 </body>
 </html>

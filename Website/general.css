@@ -1,13 +1,15 @@
 html {
-    background-image: url("../images/background.png");
+    background-image: url("background.png");
     background-color: black;
     margin: 7px 7px 7px 7px;
 }
 
 body {
-    background-image: url("../images/background.png");
+    background-image: url("background.png");
     background-color: black;
     margin: 7px 7px 7px 7px;
+    height: 5000px;
+    width: 2000px;
 }
 
 h1 {
@@ -25,14 +27,14 @@ h1 {
   margin-right: auto;
   margin-top: 0px;
   padding: 0px 0px 0px 0px;
-  width: 1400px;
-  height: 1100px;
+  width: 1275px;
+  height: 5000px;
 }
 
 .bookmarkerheader-container {
   text-align:left;
   margin-bottom:0px;
-  width: 500px;
+  width: 450px;
   background-color: rgba(255, 255, 255, 0);
   float:left;
 }
@@ -49,6 +51,22 @@ h1 {
 
 .navbar-container a{
   text-decoration: none;
+}
+
+a:link {
+  text-decoration: none;
+}
+
+a:visted {
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+a:active {
+  text-decoration: underline;
 }
 
 .h5-narrow {
