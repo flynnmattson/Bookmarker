@@ -3,10 +3,68 @@
 <html>
 <head>
   <link rel="stylesheet" type="text/css" href="general.css">
+  <!--Accordion Demo-->
+  <script type="text/javascript">
+    //<![CDATA[
+
+    var accordionItems = new Array();
+
+    function init()
+    {
+      // Grab the accordion items from the page
+      var divs = document.getElementsByTagName( 'div' );
+      for ( var i = 0; i < divs.length; i++ )
+      {
+        if ( divs[i].className == 'accordionItem' )
+        {
+          accordionItems.push( divs[i] );
+        }
+      }
+
+      // Assign onclick events to the accordion item headings
+      for ( var i = 0; i < accordionItems.length; i++ )
+      {
+        var h2 = getFirstChildWithTagName( accordionItems[i], 'H2' );
+        h2.onclick = toggleItem;
+      }
+
+      // Hide all accordion item bodies except the first
+      for ( var i = 0; i < accordionItems.length; i++ )
+      {
+        accordionItems[i].className = 'accordionItem hide';
+      }
+    }
+
+    function toggleItem()
+    {
+      var itemClass = this.parentNode.className;
+
+      // Show this item if it was previously hidden
+      if ( itemClass == 'accordionItem hide' )
+      {
+        this.parentNode.className = 'accordionItem';
+      }
+      else //hide this item if it was previously shown
+      {
+        this.parentNode.className = 'accordionItem hide'
+      }
+    }
+
+    function getFirstChildWithTagName( element, tagName )
+    {
+      for ( var i = 0; i < element.childNodes.length; i++ )
+      {
+        if ( element.childNodes[i].nodeName == tagName )
+        {
+          return element.childNodes[i];
+        }
+      }
+    }
+  </script>
 </head>
 
 
-<body>
+<body onload="init()">
 <!--Title div section-->
     <div class="bookmarkerheader-container">
       <h1>Bookmarker</h1>
@@ -46,43 +104,59 @@
 <!--Page 2-->
 <div id="Page2">
   <a id="HowItWorks"></a>
-  <h2 style="font-family:Century Gothic">Try It Now</h2>
+  <h2 style="font-family:Century Gothic">How It Works</h2>
   <a href="#Home" style ="text-decoration:none;font-family:Century Gothic">Go back to top</a>
 </div>
+
 <!--Page 3-->
-<div id="Page3">
+<div id="Page3" style="background-color: rgba(204, 255, 204, 0.3)">
   <a id="FAQ"></a> <!--NEEDS MAJOR STYLE/DESIGN HELP, just getting content onto the page!-->
-  <h2 style="font-family:Century Gothic">FAQ</h2>
-  <dl class="detailedlist-container" style="font-family:Century Gothic">
-    <h4>Getting Started</h4>
-    <dt>I'm not familiar with Google Extensions, how can I get Bookmarker running?</dt>
-    <dd>You can easily download the extension from our website's homepage. The extension is also available from
-      Google Chrome's collection of extensions.</dd>
+  <h2 style="font-family:Lucida Sans Unicode; text-align:center" >Frequently Asked Questions</h2>
 
-    <dt>What is a live feed?</dt>
-    <dd>A live feed is a place for you to share and see the latest and hottest links. The live feed is meant
-      to filled with current and interesting links users would like to share with everyone.</dd>
+  <!--start accordion trial-->
+  <h3 style="font-family:Lucida Sans Unicode; margin-left:5px">Getting Started</h3>
+    <div class="accordionItem">
+      <h2 style="font-family:Lucida Sans Unicode; font-size:16px">I'm not familiar with Google Extensions, how can I get Bookmarker running?</h2>
+      <div>
+        <p style="font-family:Lucida Sans Unicode; font-size:14px">You can easily download the extension from our website's homepage. The extension is also available from Google Chrome's collection of extensions.</p>
+      </div>
+    </div>
 
-    <dt>What is the difference between adding someone and subscribing to someone?</dt>
-    <dd>When you add someone, you will be able to send links to and receive links from others directly and view each others live feeds.
-      When you subscribe to someone, you will only be able to view their live feed.</dd>
+    <div class="accordionItem">
+      <h2 style="font-family:Lucida Sans Unicode; font-size:16px">What is a live feed?</h2>
+      <div>
+        <p style="font-family:Lucida Sans Unicode; font-size:14px">A live feed is a place for you to share and see the latest and hottest links. The live feed is meant
+    to filled with current and interesting links users would like to share with everyone.</p>
+      </div>
+    </div>
+    <h3 style="font-family:Lucida Sans Unicode; margin-left:5px">Account Management</h3>
+    <div class="accordionItem">
+      <h2 style="font-family:Lucida Sans Unicode; font-size:16px">How can I manage my account settings from within the extension?</h2>
+      <div>
+        <p style="font-family:Lucida Sans Unicode; font-size:14px">Unfortunately, users can't currently manage their accounts from within the extension. Our team is working
+    hard to add this feature. For now, you can manage your account by clicking on the settings button at the
+    bottom of the home screen. You will be redirected to the Bookmarker.com website, where you can manage your account.</p>
+      </div>
+    </div>
 
-    <h4>Account Management</h4>
-    <dt>How can I manage my account settings from within the extension?</dt>
-    <dd>Unfortunately, users can't currently manage their accounts from within the extension. Our team is working
-      hard to add this feature. For now, you can manage your account by clicking on the settings button at the
-      bottom of the home screen. You will be redirected to the Bookmarker.com website, where you can manage your account.</dd>
+    <h3 style="font-family:Lucida Sans Unicode; margin-left:5px">Editing Bookmarks</h3>
+    <div class="accordionItem">
+      <h2 style="font-family:Lucida Sans Unicode; font-size:16px">How can I delete multiple links at one time?</h2>
+      <div>
+        <p style="font-family:Lucida Sans Unicode; font-size:14px">To delete multiple links, simply select the links to be deleted by checking the corresponding boxes and
+      click on the trash can at the bottom of the page.</p>
+      </div>
+    </div>
+    <div class="accordionItem">
+      <h2 style="font-family:Lucida Sans Unicode; font-size:16px">How can I edit a bookmark?</h2>
+      <div>
+        <p style="font-family:Lucida Sans Unicode; font-size:14px">Editing bookmarks is easy with Bookmarker. Simply click on the edit button (insert small button image?)
+    corresponding to the bookmark you want to edit. A popup will appear where you can rename the bookmark.</p>
+      </div>
+    </div>
+<!--End accordion trial-->
 
-    <h4>Editing Bookmarks</h4>
-    <dt>How can I delete multiple links at one time?</dt>
-    <dd>To delete multiple links, simply select the links to be deleted by checking the corresponding boxes and
-        click on the trash can at the bottom of the page.</dd>
-
-    <dt>How can I edit a bookmark?</dt>
-    <dd>Editing bookmarks is easy with Bookmarker. Simply click on the edit button (insert small button image?)
-      corresponding to the bookmark you want to edit. A popup will appear where you can rename the bookmark. </dd>
-  </dl>
-  <a href="#Home" style ="text-decoration:none;font-family:Century Gothic">Go back to top</a>
+  <a href="#Home" style ="text-decoration:none;font-family:Lucida Sans Unicode">Go back to top</a>
 </div>
 <!--Page 4-->
 <div id="Page4">

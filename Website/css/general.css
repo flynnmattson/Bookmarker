@@ -1,0 +1,98 @@
+body {
+    font-family: Helvetica, Tahoma;
+    background-image: url("../images/background.png");
+    background-color: white;
+    margin: 7px 7px 7px 7px;
+    min-width:300px;
+}
+
+.body-container {
+  background-color: rgba(255, 255, 255, 0.85);
+  margin-left: auto;
+  margin-right: auto;
+  padding: 1px 15px 1px 15px;
+  width: 300px;
+}
+
+.home-container {
+    width: 350px;
+}
+
+.footer-container {
+  font-family: Helvetica, Tahoma;
+  background-color: rgba(60, 60, 60, 0.85);
+  margin-left: auto;
+  margin-right: auto;
+  padding: 7px 15px 7px 15px;
+  width: 100%;
+  color: white;
+}
+
+.panel-my-subscriptions > .panel-heading {
+  background-color: rgb(0, 140, 190);
+  color: white;
+}
+
+.panel-shared-with-me > .panel-heading {
+  background-color: rgb(150, 150, 0);
+  color: white;
+}
+
+.panel-my-bookmarks > .panel-heading {
+  background-color: rgb(170, 45, 0);
+  color: white;
+}
+
+.h5-narrow {
+  font-size: 13px;
+  text-align: center;
+}
+
+.btn-fullSize {
+  width: 100%;
+}
+
+.btn-halfSize {
+  width: 50%;
+}
+
+.btn-size49 {
+  width: 49%;
+}
+
+.btn-search {
+  background-color: rgb(60, 60, 60);
+  color: white;
+}
+
+.btn-signout {
+  background-color: rgba(0, 0, 0, 0.0);
+  border: 0px;
+  color: white;
+  padding: 2px 4px 2px 4px;
+  margin: 0px 0px 0px 0px;
+}
+
+.btn-signin {
+  background-color: rgb(200, 0, 0);
+  border-color: gray;
+  color: white;
+}
+
+.btn-google {
+  background-color: rgb(60, 60, 60);
+  border-color: gray;
+  color: white;
+  width: 49%;
+}
+
+.btn-facebook {
+  background-color: rgb(0, 100, 150);
+  border-color: gray;
+  color: white;
+}
+
+.btn-margin2 {
+  margin-bottom: 2px;
+  margin-top: 2px;
+}

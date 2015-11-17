@@ -69,6 +69,48 @@ a:active {
   text-decoration: underline;
 }
 
+.accordionItem h2
+{
+  /*margin: 0;*/
+  margin-left: 10px;
+  margin-bottom: 0px;
+  margin-right: 10px;
+  font-size: 1.1em;
+  padding: 0.4em;
+  color: #fff;
+  /*background-color: rgb(0, 140, 190);*/
+  background-color: rgb(204, 204, 0);
+  border-bottom: 1px solid #66d;
+}
+
+.accordionItem h2:hover
+{
+  cursor: pointer;
+}
+
+.accordionItem div
+{
+  /*margin: 0;*/
+  margin-left: 10px;
+  margin-bottom: 5px;
+  margin-right: 10px;
+  margin-top:0px;
+  padding: 3px;
+  background-color: rgb(255, 255, 255);
+  border-bottom: 1px solid #66d;
+}
+
+.accordionItem.hide h2
+{
+  color: #eef;
+  background-color:rgb(0, 140, 190);
+}
+
+.accordionItem.hide div
+{
+  display: none;
+}
+
 .h5-narrow {
   font-family: "Arial Narrow", Tahoma;
   font-size: 16px;
