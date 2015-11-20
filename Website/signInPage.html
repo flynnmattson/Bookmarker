@@ -1,22 +1,60 @@
-<!DOCTYPE html>
+<!doctype html>
+<html lang="en">
+  <head>
+    <title>Bookmarker</title>
 
-<html>
-<head>
-  <script>
-  function openAccountDashboard()
-  {
+    <script src="libs/firebase.js"></script>
+    <script src="libs/angular.min.js"></script>
+    <script src="libs/angularfire.min.js"></script>
+    <script src="libs/angular-route.min.js"></script>
+    <script src="libs/angular-animate.js"></script>
+    <script src="libs/jquery-2.1.4.min.js"></script>
+    <script src="libs/ui-bootstrap-tpls-0.14.3.min.js"></script>
+    <script src="app.js"></script>
+    <script src="login.controller.js"></script>
 
-  }
-  </script>
-<link rel="stylesheet" type="text/css" href="general.css">
-</head>
+    <link href="css/bootstrap.css" rel="stylesheet">
+    <link href="css/general.css" rel="stylesheet">
 
-<body>
-  <h1>Sign into Bookmarker</h1>
-  <div class="body-container">
-    <div align="center">
-      <button type="Submit" onclick="openAccountDashboard()">Sign-in</button>
+  </head>
+
+  <body>
+
+    <div class="body-container">
+
+      <h3>Sign In</h3>
+
+      <div ng-app="Bookmarker" ng-controller="LoginCtrl">
+
+          <!-- Alerts -->
+          <div ng-if="alerts">
+            <uib-alert ng-repeat="alert in alerts" type="{{alert.type}}" close="closeAlert($index)">{{alert.msg}}</uib-alert>
+          </div>
+
+          <!-- Login form -->
+          <form class="form-group" ng-submit="Login()" >
+
+            <input type="text" class="form-control" ng-model="email" placeholder="example@bookmarker.com"/>
+
+            <div class="row">
+              <div class="col-xs-9">
+                <input type="password" class="form-control" ng-model="password" placeholder="********"/>
+              </div>
+            </div>
+
+            <br />
+            <div align="center">
+              <button type="submit" class="btn btn-danger btn-fullSize btn-margin2 btn-signin">Sign In</button>
+              <!-- <button type="button" class="btn btn-default btn-size49 btn-margin2 btn-google">Google</button>
+              <button type="button" class="btn btn-primary btn-size49 btn-margin2 btn-facebook">Facebook</button> -->
+            </div>
+
+          </form>
+
+        <h5 class="h5-narrow">New to Bookmarker? <a href="./create-account.html">Create an account now</a>.</h5>
+        <h5 class="h5-narrow">{{currentTab}}</h5>
+      </div>
     </div>
-</div>
-</body>
+
+  </body>
 </html>

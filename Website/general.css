@@ -10,9 +10,12 @@ body {
     margin: 7px 7px 7px 7px;
     height: 5000px;
     width: 1275px;
+    overflow-x:hidden;
+    max-with:100%;
 }
 
 h1 {
+  max-width:100%;
   color: rgba(255, 255, 255, 0.85);
   font-family: "Harrington";
   font-size: 50px;
@@ -71,7 +74,7 @@ a:active {
 
 .accountmanagement-container {
   float:right;
-  text-align:left;
+  text-align:right;
   margin:none;
   bacground-image:url("background.png");
   /*background-color: rgb(0, 0, 0);*/
@@ -79,6 +82,7 @@ a:active {
   padding-left:0px;
   padding-right: 10px;
   margin-left: none;
+  width:100%;
 }
 
 .accordionItem h2
