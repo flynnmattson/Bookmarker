@@ -96,3 +96,36 @@ body {
   margin-bottom: 2px;
   margin-top: 2px;
 }
+
+/*CSS Stuff added for Profile Page*/
+.btn-add {
+  background-color:rgb(51, 0, 51);;
+  border-color: gray;
+  color:while;
+}
+
+.btn-subscribe {
+  background-color:rgb(51, 0, 51);;
+  border-color: gray;
+  color:while;
+
+}
+
+.footer-container {
+  font-family: Helvetica, Tahoma;
+  background-color: rgba(60, 60, 60, 0.85);
+  margin-left: auto;
+  margin-right: auto;
+  padding: 7px 15px 7px 15px;
+  width: 300px;
+  margin-left:none;
+  color: white;
+}
+
+.btn-signout {
+  background-color: rgba(0, 0, 0, 0.0);
+  border: 0px;
+  color: white;
+  padding: 2px 4px 2px 4px;
+  margin: 0px 0px 0px 0px;
+}

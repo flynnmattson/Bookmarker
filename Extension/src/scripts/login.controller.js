@@ -1,6 +1,11 @@
 app.controller('LoginCtrl', ['$scope', 'Auth', 'ref',
     function($scope, Auth, ref) {
 
+    //For testing purposes only
+    $scope.loadProfile = function() {
+        window.location.href = "./profile.html";
+      }
+
     // close an specified alert message
     $scope.closeAlert = function(index) {
       $scope.alerts.splice(index, 1);
