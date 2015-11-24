@@ -59,6 +59,7 @@ app.controller('HomeScreenCtrl', ['$scope', 'Auth', 'ref',
               var data = processNode(item);
               console.log(data);
               ref.child("users").child("flynn").push(data);
+              $scope.$apply();
           });
         });
 
