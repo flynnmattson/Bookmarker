@@ -6,6 +6,10 @@ app.controller('LoginCtrl', ['$scope', 'Auth', 'ref',
       $scope.alerts.splice(index, 1);
     };
 
+    $scope.cancel = function() {
+      window.location.href = 'homepage.html';
+    };
+
     $scope.Login = function() {
       // clear all alert messages
       $scope.alerts = [];
@@ -27,7 +31,7 @@ app.controller('LoginCtrl', ['$scope', 'Auth', 'ref',
           // store the Firebase authentication token for this session
           chrome.storage.local.set({'AUTH_TOKEN': authData.token});
           // redirect user to the home screen
-          window.location.href = './home-screen.html';
+          window.location.href = 'dashboard.html';
 
         }).catch(function(error) {
           // user could not be logged in

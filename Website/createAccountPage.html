@@ -1,12 +1,64 @@
-<!DOCTYPE html>
+<!doctype html>
+<html lang="en">
+  <head>
+    <title>Create an Account - Bookmarker</title>
 
-<html>
-<head>
-<link rel="stylesheet" type="text/css" href="general.css">
+    <script src="libs/firebase.js"></script>
+    <script src="libs/angular.min.js"></script>
+    <script src="libs/angularfire.min.js"></script>
+    <script src="libs/angular-route.min.js"></script>
+    <script src="libs/angular-animate.js"></script>
+    <script src="libs/jquery-2.1.4.min.js"></script>
+    <script src="libs/ui-bootstrap-tpls-0.14.3.min.js"></script>
+    <script src="app.js"></script>
+    <script src="createAccountPage.controller.js"></script>
 
-</head>
+    <link href="css/bootstrap.css" rel="stylesheet">
+    <link href="css/general.css" rel="stylesheet">
 
-<body>
-  <h1>Create Your Account</h1>
-</body>
+  </head>
+
+  <body>
+
+    <div class="body-container">
+
+      <h3>Sign Up</h3>
+
+      <div ng-app="Bookmarker" ng-controller="RegistrationCtrl">
+
+          <!-- Alerts -->
+          <div ng-if="alerts">
+            <uib-alert ng-repeat="alert in alerts" type="{{alert.type}}" close="closeAlert($index)">{{alert.msg}}</uib-alert>
+          </div>
+
+          <!-- Registration form -->
+          <form class="form-group" ng-submit="createAccount()" action="" method="post" enctype="multipart/form-data">
+            <input type="text" class="form-control" ng-model="name" placeholder="Full name"/>
+            <input type="text" class="form-control" ng-model="email" placeholder="Email address"/>
+
+            <div class="row">
+              <div class="col-xs-9">
+                <input type="password" class="form-control" ng-model="password" placeholder="New password"/>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-xs-9">
+                <input type="password" class="form-control" ng-model="repassword" placeholder="Re-enter your password"/>
+              </div>
+            </div>
+            <h5>Upload a profile picture now</h5>
+            <input type="file" name="profilePicture" size="40">
+
+            <br />
+            <div align="right">
+              <button type="button" class="btn btn-default" ng-click="cancel()">Cancel</button>
+              <button type="submit" class="btn btn-success">Create Account</button>
+            </div>
+            <h5 class="h5-narrow">Have an account? <a href="signInPage.html">Sign In now</a>.</h5>
+          </form>
+
+      </div>
+    </div>
+
+  </body>
 </html>

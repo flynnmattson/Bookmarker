@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="en">
   <head>
-    <title>Bookmarker</title>
+    <title>Sign Into Bookmarker</title>
 
     <script src="libs/firebase.js"></script>
     <script src="libs/angular.min.js"></script>
@@ -11,7 +11,7 @@
     <script src="libs/jquery-2.1.4.min.js"></script>
     <script src="libs/ui-bootstrap-tpls-0.14.3.min.js"></script>
     <script src="app.js"></script>
-    <script src="login.controller.js"></script>
+    <script src="signInPage.controller.js"></script>
 
     <link href="css/bootstrap.css" rel="stylesheet">
     <link href="css/general.css" rel="stylesheet">
@@ -48,7 +48,7 @@
               <!-- <button type="button" class="btn btn-default btn-size49 btn-margin2 btn-google">Google</button>
               <button type="button" class="btn btn-primary btn-size49 btn-margin2 btn-facebook">Facebook</button> -->
             </div>
-
+            <button type="button" class="btn btn-default btn-fullSize btn-margin2" ng-click="cancel()">Cancel</button>
           </form>
 
         <h5 class="h5-narrow">New to Bookmarker? <a href="./create-account.html">Create an account now</a>.</h5>
