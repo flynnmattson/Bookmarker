@@ -1,25 +1,24 @@
-app.controller('HomeScreenCtrl', ['$scope', 'Auth', 'ref',
-    function($scope, Auth, ref) {
+var t;
+app.controller('HomeScreenCtrl', ['$scope', 'Auth', 'ref', 'AuthService',
+    function($scope, Auth, ref, AuthService) {
+      t = $scope;
+      $scope.currentUser = AuthService.currentUser(),
+      $scope.isLoggedIn = AuthService.isLoggedIn(),
+      $scope.items = AuthService.getBookmarks($scope.currentUser);
 
-      // try to retrieve token from local storage
-      chrome.storage.local.get('AUTH_TOKEN', function (result) {
-        if(result.AUTH_TOKEN){
-          // try to authenticate user again with the token stored in the last session
-          Auth.$authWithCustomToken(
-            result.AUTH_TOKEN
-
-          ).then(function(authData) {
-            // if successfull, user has been signed in to his/her account
-          }).catch(function(error) {
-            // user could not be logged in
-            window.location.href = './login.html';
-          });
-        }
-        else {
-          // user has not logged in yet
-          window.location.href = './login.html';
-        }
+      // Now using AuthService factory that includes awesome methods!!
+      $scope.$watch(AuthService.isLoggedIn, function(isLoggedIn) {
+        $scope.isLoggedIn = isLoggedIn;
       });
+      // Retrieves the current user uid
+      $scope.$watch(AuthService.currentUser, function(currentUser) {
+        $scope.currentUser = currentUser;
+      });
+
+      $scope.$watch(AuthService.getBookmarks($scope.currentUser), function(currentBookmarks) {
+        $scope.items = currentBookmarks;
+      });
+
 
       // unauthenticate user and remove token from local storage
       $scope.logout = function() {
@@ -50,20 +49,17 @@ app.controller('HomeScreenCtrl', ['$scope', 'Auth', 'ref',
         chrome.tabs.create({"url":link});
       };
 
-      $scope.items = [];
-
       $scope.linkBookmarks = function() {
         chrome.bookmarks.getTree(function(itemTree){
           itemTree.forEach(function(item){
-              console.log(item);
-              var data = processNode(item);
-              console.log(data);
-              ref.child("users").child("flynn").push(data);
-              $scope.$apply();
+            var data = processNode(item.children[0]);
+            ref.child("users").child($scope.currentUser).update(data);
+            $scope.$apply();
           });
         });
 
         function processNode(node) {
+          console.log(node);
           // If there is a child then this node is a folder.
           if(node.children) {
             var theChildren = []
@@ -79,10 +75,6 @@ app.controller('HomeScreenCtrl', ['$scope', 'Auth', 'ref',
 
           // If there is a url then this node is a bookmarked link.
           if(node.url) {
-            $scope.items.push({
-                "title" : node.title,
-                "url" : node.url
-            });
             return {
               "id" : node.id,
               "parentId" : node.parentId,
