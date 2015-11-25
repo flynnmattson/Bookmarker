@@ -3,6 +3,17 @@
 <html>
 <head>
   <title>Bookmarker Home</title>
+  <script src="scripts/libs/firebase.js"></script>
+  <script src="scripts/libs/angular.min.js"></script>
+  <script src="scripts/libs/angularfire.min.js"></script>
+  <script src="scripts/libs/angular-route.min.js"></script>
+  <script src="scripts/libs/angular-animate.js"></script>
+  <script src="scripts/libs/jquery-2.1.4.min.js"></script>
+  <script src="scripts/libs/ui-bootstrap-tpls-0.14.3.min.js"></script>
+  <script src="scripts/app.js"></script>
+  <script src="homepage.controller.js"></script>
+
+  <link href="css/bootstrap.css" rel="stylesheet">
   <link rel="stylesheet" type="text/css" href="general.css">
   <!--Accordion Demo-->
   <script type="text/javascript">
@@ -108,13 +119,16 @@
   <div class="body-container">
 <!--Breakdown of each "page" section-->
 <!--Page 1-->
-<div id="Page1">
+<div id="Page1" ng-app = "Bookmarker" ng-controller="homepageCtrl">>
   <a id="GettingStarted"></a>
   <h2 style="font-family:Century Gothic">Getting Started Page</h2>
   <div style="background-image: url(images/flower.jpg);
- height: 600px; width: 1600px; border: 1px solid white;">
+      height: 600px; width: 1600px; border: 1px solid white;">
+  <button type="button" class="btn btn-danger btn-size20 btn-margin2 btn-dlnow"
+  ng-click='downloadExtension()'>Download Now</button>
  </div>
-  <a href="#Home" style ="text-decoration:none;font-family:Century Gothic">Go back to top</a>
+  <a href="#Home" style ="text-decoration:none;font-family:Century Gothic">Go back to top
+  </a>
 </div>
 <!--Page 2-->
 <div id="Page2">

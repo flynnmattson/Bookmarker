@@ -7,11 +7,10 @@ html {
 body {
     background-image: url("background.png");
     background-color: black;
-    margin: 7px 7px 7px 7px;
+    margin: 0%;
     height: 5000px;
-    width: 1275px;
+    width: 100%;
     overflow-x:hidden;
-    max-with:100%;
 }
 
 h1 {
@@ -26,11 +25,9 @@ h1 {
 .body-container {
   clear:left;
   background-color: rgba(255, 255, 255, 0.85);
-  margin-left: 0px;
-  margin-right: auto;
-  margin-top: 0px;
-  padding: 0px 0px 0px 0px;
-  width: 100%;
+  margin: 0%;
+  padding: 0%;
+  max-width: 100%;
   height: 5000px;
 }
 
@@ -45,10 +42,11 @@ h1 {
 .navbar-container {
   float:left;
   text-align:right;
-  margin-left:-30px;
-  margin-top: 30px;
-  margin-bottom:0px;
-  margin-right: 25px;
+  padding-right: 0%;
+  margin-left:-3%;
+  margin-top: 3%;
+  margin-bottom: 0%;
+  margin-right: 2%;
   background-color: rgba(255, 255, 255, 0);
 }
 
@@ -143,6 +141,17 @@ a:active {
 
 .btn-size49 {
   width: 49%;
+}
+
+.btn-size20{
+  width: 20%;
+  height: 5%;
+}
+
+.btn-dlnow{
+  position: relative;
+  top: 50%;
+  left: 30%;
 }
 
 .btn-signin {
