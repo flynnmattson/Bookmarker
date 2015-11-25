@@ -1,16 +1,21 @@
 html {
-    background-image: url("../images/background.png");
+    background-image: url("background.png");
     background-color: black;
     margin: 7px 7px 7px 7px;
 }
 
 body {
-    background-image: url("../images/background.png");
+    background-image: url("background.png");
     background-color: black;
     margin: 7px 7px 7px 7px;
+    height: 5000px;
+    width: 1275px;
+    overflow-x:hidden;
+    max-with:100%;
 }
 
 h1 {
+  max-width:100%;
   color: rgba(255, 255, 255, 0.85);
   font-family: "Harrington";
   font-size: 50px;
@@ -25,14 +30,14 @@ h1 {
   margin-right: auto;
   margin-top: 0px;
   padding: 0px 0px 0px 0px;
-  width: 1400px;
-  height: 1100px;
+  width: 100%;
+  height: 5000px;
 }
 
 .bookmarkerheader-container {
   text-align:left;
   margin-bottom:0px;
-  width: 500px;
+  width: 450px;
   background-color: rgba(255, 255, 255, 0);
   float:left;
 }
@@ -49,6 +54,77 @@ h1 {
 
 .navbar-container a{
   text-decoration: none;
+}
+
+a:link {
+  text-decoration: none;
+}
+
+a:visted {
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+a:active {
+  text-decoration: underline;
+}
+
+.accountmanagement-container {
+  float:right;
+  text-align:right;
+  margin:none;
+  bacground-image:url("background.png");
+  /*background-color: rgb(0, 0, 0);*/
+  padding-bottom:0px;
+  padding-left:0px;
+  padding-right: 10px;
+  margin-left: none;
+  width:100%;
+}
+
+.accordionItem h2
+{
+  /*margin: 0;*/
+  margin-left: 10px;
+  margin-bottom: 0px;
+  margin-right: 10px;
+  font-size: 1.1em;
+  padding: 0.4em;
+  color: #fff;
+  /*background-color: rgb(0, 140, 190);*/
+  background-color: rgb(204, 204, 0);
+  border-bottom: 1px solid #66d;
+}
+
+.accordionItem h2:hover
+{
+  cursor: pointer;
+}
+
+.accordionItem div
+{
+  /*margin: 0;*/
+  margin-left: 10px;
+  margin-bottom: 5px;
+  margin-right: 10px;
+  margin-top:0px;
+  padding: 3px;
+  background-color: rgb(255, 255, 255);
+  border-bottom: 1px solid #66d;
+}
+
+.accordionItem.hide h2
+{
+  color: #eef;
+  background-color:rgb(0, 140, 190);
+}
+
+.accordionItem.hide div
+{
+  display: none;
 }
 
 .h5-narrow {
