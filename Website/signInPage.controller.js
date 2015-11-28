@@ -7,7 +7,7 @@ app.controller('LoginCtrl', ['$scope', 'Auth', 'ref',
     };
 
     $scope.cancel = function() {
-      window.location.href = 'homepage.html';
+      window.location = 'homepage.html';
     };
 
     $scope.Login = function() {
