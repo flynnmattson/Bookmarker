@@ -1,6 +1,6 @@
 app.controller('DashboardCtrl', ['$scope', 'Auth', 'ref',
     function($scope, Auth, ref) {
-
+      $scope.showForm = false;
     // close an specified alert message
     $scope.closeAlert = function(index) {
       $scope.alerts.splice(index, 1);
@@ -13,12 +13,12 @@ app.controller('DashboardCtrl', ['$scope', 'Auth', 'ref',
 
     $scope.changePassword = function(){
       //NEED  TO CHANGE TO ACTUAL PASSWORD CHANGE FORM
-        window.location.href = 'homepage.html';
+      $scope.showForm = true;
     };
 
     $scope.updateProfile = function()
     {
-
+      $scope.showForm = false; 
     }
 
 
