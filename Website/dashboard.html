@@ -39,6 +39,8 @@
       <div class="col-xs-9">
         <input type="text" class="form-control" ng-model="password" placeholder="Password">
         <input type ="button" ng-click="changePassword()" value = "Change Password"/>
+        <input type = "text" class = "form-control" ng-if = "showForm" ng-model = "password" placeholder = "New Password"/>
+        <input type = "text" class = "form-control" ng-if = "showForm" ng-model = "password" placeholder = "Retype Password"/>
       </div>
 
         <!--CAN WE MOVE THIS UP BY THE PROFILE PIC?-->
