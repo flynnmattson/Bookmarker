@@ -19,8 +19,7 @@ app.controller('DashboardCtrl', ['$scope', 'Auth', 'ref',
     $scope.updateProfile = function()
     {
       $scope.showForm = false;
-    }
-
+    };
 
     /*
     $scope.createAccount = function() {
