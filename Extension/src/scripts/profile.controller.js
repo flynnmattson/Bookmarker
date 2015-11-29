@@ -44,6 +44,7 @@ app.controller('ProfileCtrl', ['$scope', 'Auth', 'ref',
         {
           $scope.addButton = "Cancel Request";
           /*place THIS person in OTHERS friend requests in db*/
+          ref.child("users").child($scope.currentUser).chid
         }
         else if($scope.addButton == "Cancel Request")
         {
