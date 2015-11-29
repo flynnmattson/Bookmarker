@@ -47,11 +47,11 @@ app.factory('AuthService', ['Auth', 'ref',
         }
       },
       getBookmarks: function(uid) {
-        var link = "https://de-bookmarker.firebaseio.com/users/" + uid;
+        var link = "https://de-bookmarker.firebaseio.com/users/" + uid + "/bookmarks";
         var userRef = new Firebase(link);
         userRef.on("value" , function(snapshot) {
           console.log(snapshot.val());
-          return snapshot.val();
+          return angular.copy(snapshot.val());
         });
       }
     };

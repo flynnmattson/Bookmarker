@@ -16,7 +16,7 @@ app.controller('HomeScreenCtrl', ['$scope', 'Auth', 'ref', 'AuthService',
       });
 
       $scope.$watch(AuthService.getBookmarks($scope.currentUser), function(currentBookmarks) {
-        $scope.items = currentBookmarks;
+        //$scope.items = currentBookmarks;
       });
 
 
@@ -53,7 +53,7 @@ app.controller('HomeScreenCtrl', ['$scope', 'Auth', 'ref', 'AuthService',
         chrome.bookmarks.getTree(function(itemTree){
           itemTree.forEach(function(item){
             var data = processNode(item.children[0]);
-            ref.child("users").child($scope.currentUser).update(data);
+            ref.child("users").child($scope.currentUser).child("bookmarks").update(data);
             $scope.$apply();
           });
         });
