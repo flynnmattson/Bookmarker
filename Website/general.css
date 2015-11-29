@@ -1,7 +1,7 @@
 html {
     background-image: url("background.png");
     background-color: black;
-    margin: 7px 7px 7px 7px;
+    margin: 0px 0px 0px 0px;
 }
 
 body {
@@ -35,6 +35,15 @@ h1 {
   text-align:left;
   margin-bottom:0px;
   width: 450px;
+  background-color: rgba(255, 255, 255, 0);
+  float:left;
+}
+
+.dashboardheader-container {
+  text-align:left;
+  margin-bottom:0px;
+  width: 45%;
+  height: 1%;
   background-color: rgba(255, 255, 255, 0);
   float:left;
 }

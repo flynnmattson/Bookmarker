@@ -11,10 +11,17 @@ app.controller('DashboardCtrl', ['$scope', 'Auth', 'ref',
       window.location.href = 'homepage.html';
     };
 
-    $scope.updateProfile()
+    $scope.changePassword = function(){
+      //NEED  TO CHANGE TO ACTUAL PASSWORD CHANGE FORM
+        window.location.href = 'homepage.html';
+    };
+
+    $scope.updateProfile = function()
     {
-      
+
     }
+
+
     /*
     $scope.createAccount = function() {
 

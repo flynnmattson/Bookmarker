@@ -19,29 +19,36 @@
   </head>
 
   <body ng-app="Bookmarker" ng-controller="DashboardCtrl">
-    <div class="bookmarkerheader-container">
-      <h1>Bookmarker</h1>
+    <div class="dashboardheader-container">
+      <h1> Bookmarker</h1>
       <a id="Home"></a>
     </div>
     <div class="body-container">
+      <h2> Account Settings </h2>
       <div align="center" style="margin-bottom:10px;">
         <img src="images/bluehead.png" alt="Profile Picture" style="width:80px;height:80px;margin:10px">
       </div>
       <form class="form-group" ng-submit="createAccount()" action="" method="post" enctype="multipart/form-data">
-<div class="col-xs-9">
+        <div class="col-xs-9">
         <input type="text" class="form-control" ng-model="name" placeholder="Name"/>
       </div>
       <div class="col-xs-9">
         <input type="text" class="form-control" ng-model="email" placeholder="Email"/>
-</div>
+      </div>
 
+      <div class="col-xs-9">
+        <input type="text" class="form-control" ng-model="password" placeholder="Password">
+        <input type ="button" ng-click="changePassword()" value = "Change Password"/>
+      </div>
+
+        <!--CAN WE MOVE THIS UP BY THE PROFILE PIC?-->
         <h5 style="clear:left">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Change profile picture</h5>
         <input type="file" name="profilePicture" size="40">
 
         <br />
         <div align="right">
-          <button type="button" class="btn btn-default" ng-click="cancel()">Cancel</button>
           <button type="button" ng-click="updateProfile()" class="btn btn-success">Save Changes</button>
+          <button type="button" class="btn btn-default" ng-click="cancel()">Cancel</button>
         </div>
       </form>
     </div>
