@@ -51,8 +51,15 @@ app.factory('AuthService', ['Auth', 'ref',
         var userRef = new Firebase(link);
         userRef.on("value" , function(snapshot) {
           console.log(snapshot.val());
-          return angular.copy(snapshot.val());
+          if(snapshot.val() !== null)
+            return angular.copy(snapshot.val());
+          else
+            return [];
+        }, function(errorObject) {
+          console.log("The read failed: " + errorObject.code);
+          return [];
         });
+        return [];
       }
     };
   }
