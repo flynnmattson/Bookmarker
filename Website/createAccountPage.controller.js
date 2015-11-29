@@ -58,6 +58,7 @@ app.controller('RegistrationCtrl', ['$scope', 'Auth', 'ref',
 
           }).catch(function(error) {
             // the new user account could not be created
+            console.log(error.code);
             switch (error.code) {
               case "EMAIL_TAKEN":
                 $scope.alerts.push({type: 'danger', msg: 'The email address you entered is already in use.'});
