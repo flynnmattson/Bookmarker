@@ -20,22 +20,31 @@
 
   <body ng-app="Bookmarker" ng-controller="DashboardCtrl">
     <div class="dashboardheader-container">
-      <h1> Bookmarker</h1>
+      <font color="white" style="margin-top: 2%; margin-left: 2%;
+      float: left; font-family:Century Gothic" size ="4" > Welcome Name!</font></a>
+      </div>
       <a id="Home"></a>
     </div>
 
     <div class = "signout-container">
       <ul>
-      <a href = "homepage.html"><font color="white" style="font-family:Century Gothic" size ="3" align:left>
+      <a href = "homepage.html"><font color="white" style="font-family:Century Gothic" size ="3">
         Log Out</font></a>
       </ul>
     </div>
 
     <div class="body-container">
-      <h2> Account Settings </h2>
-      <div align="center" style="margin-bottom:10px;">
-        <img src="images/bluehead.png" alt="Profile Picture" style="width:80px;height:80px;margin:10px">
+      <div class="col-xs-9">
+        <h2> Profile Settings</h2>
+        <div align="center" style="margin-bottom:10px;">
+          <img src="images/bluehead.png" alt="Profile Picture" style="width:80px;height:80px; margin:10px">
+        </div>
+
+        <h5 style="clear:left">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Change profile picture</h5>
+        <input type="file" name="profilePicture" size="40" style = "margin-bottom: 5%">
+
       </div>
+
       <form class="form-group" ng-submit="createAccount()" action="" method="post" enctype="multipart/form-data">
         <div class="col-xs-9">
         <input type="text" class="form-control" ng-model="name" placeholder="Name"/>
@@ -48,15 +57,25 @@
         <input type="text" class="form-control" ng-model="password" placeholder="Password">
         <input type ="button" ng-click="changePassword()" value = "Change Password"/>
         <input type = "text" class = "form-control" ng-if = "showForm" ng-model = "password" placeholder = "New Password"/>
-        <input type = "text" class = "form-control" ng-if = "showForm" ng-model = "password" placeholder = "Retype Password"/>
+        <input type = "text" class = "form-control" ng-if = "showForm" ng-model = "password" placeholder = "Confirm Password"/>
       </div>
 
-        <!--CAN WE MOVE THIS UP BY THE PROFILE PIC?-->
-        <h5 style="clear:left">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Change profile picture</h5>
-        <input type="file" name="profilePicture" size="40">
-
-        <br />
-        <div align="right">
+      <div class="col-xs-9" style = "margin-top: 4% margin-bottom: 5%">
+        <h2> Notification Settings </h2>
+        <label>
+        <input type = "radio" name = "extensionNotification" size = "30" value = "inExtenstion">
+        Send me notifications in the extension
+      </label></br>
+      <label>
+        <input type = "radio" name = "extensionNotification" size = "30" value = "email">
+        Send me notifications by e-mail
+        </label></br>
+        <label>
+        <input type = "radio" name = "extensionNotification" size = "30" value = "both">
+        Send me notifications through both extension and e-mail
+        </label></br>
+    </div>
+        <div class = "col-xs-9" align="right" style = "margin-top: 5%">
           <button type="button" ng-click="updateProfile()" class="btn btn-success">Save Changes</button>
           <button type="button" class="btn btn-default" ng-click="cancel()">Cancel</button>
         </div>
