@@ -1,9 +1,32 @@
-app.controller('ProfileCtrl', ['$scope', 'Auth', 'ref',
-    function($scope, Auth, ref) {
+app.controller('ProfileCtrl', ['$scope', '$firebaseObject', 'Auth', 'ref',
+    function($scope, $firebaseObject, Auth, ref) {
 
       /*Declare variables*/
       $scope.addButton = "";
       $scope.subscribeButton = "";
+      $scope.profile = "";
+
+
+      //Grab user profile --only works for Flynn now!!
+      var link = "https://de-bookmarker.firebaseio.com/users/8ffd810f-1ccf-4fba-8441-f197f993749d";
+      var userRef = new Firebase(link);
+      //$scope.profile = $firebaseObject(userRef);
+
+      $scope.profile = $firebaseObject(userRef);
+
+      console.log($scope.profile);
+      /*
+      userRef.on("value", function(snapshot) {
+        if(snapshot.val() !== null)
+        {
+          console.log(snapshot.val());
+          angular.copy(snapshot.val(), $scope.user);
+          console.log($scope.user);
+          $scope.$apply();
+        }
+      }, function(errorObject) {
+        console.log("The read failed: " + errorObject.code);
+      });*/
 
       $scope.loadButtons = function()
       {
@@ -44,7 +67,7 @@ app.controller('ProfileCtrl', ['$scope', 'Auth', 'ref',
         {
           $scope.addButton = "Cancel Request";
           /*place THIS person in OTHERS friend requests in db*/
-          ref.child("users").child($scope.currentUser).chid
+
         }
         else if($scope.addButton == "Cancel Request")
         {
