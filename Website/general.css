@@ -63,6 +63,17 @@ h1 {
   text-decoration: none;
 }
 
+.signout-container {
+  float:right;
+  text-align:right;
+  padding-right: 0%;
+  margin-top: 1%;
+  margin-bottom: 0%;
+  margin-right: 2%;
+  background-color: rgba(255, 255, 255, 0);
+}
+
+
 a:link {
   text-decoration: none;
 }
