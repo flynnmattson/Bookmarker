@@ -1,6 +1,6 @@
 var t;
-app.controller('HomeScreenCtrl', ['$scope', 'Auth', 'ref', 'AuthService',
-  function($scope, Auth, ref, AuthService) {
+app.controller('HomeScreenCtrl', ['$scope', 'Auth', 'ref', 'AuthService', '$firebaseArray',
+  function($scope, Auth, ref, AuthService, $firebaseArray) {
     t = $scope;
     $scope.currentUser = AuthService.currentUser(),
     $scope.isLoggedIn = AuthService.isLoggedIn(),
@@ -11,7 +11,7 @@ app.controller('HomeScreenCtrl', ['$scope', 'Auth', 'ref', 'AuthService',
       var userRef = new Firebase(link);
       userRef.on("value" , function(snapshot) {
         if(snapshot.val() !== null) {
-          $scope.items = angular.copy(snapshot.val());
+          angular.copy(snapshot.val(), $scope.items);
           $scope.$apply();
           return;
         }
@@ -21,7 +21,11 @@ app.controller('HomeScreenCtrl', ['$scope', 'Auth', 'ref', 'AuthService',
       $scope.items = [];
     }
 
-    getBookmarks($scope.currentUser);
+    //getBookmarks($scope.currentUser);
+    var link = "https://de-bookmarker.firebaseio.com/users/" + $scope.currentUser + "/bookmarks";
+    var userRef = new Firebase(link);
+    $scope.items = $firebaseArray(userRef);
+    console.log($scope.items);
 
     // Now using AuthService factory that includes awesome methods!!
     $scope.$watch(AuthService.isLoggedIn, function(isLoggedIn) {
