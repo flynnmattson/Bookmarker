@@ -1,10 +1,36 @@
 var t;
-app.controller('HomeScreenCtrl', ['$scope', 'Auth', 'ref', 'AuthService',
-  function($scope, Auth, ref, AuthService) {
+app.controller('HomeScreenCtrl', ['$scope', '$firebaseObject', '$firebaseArray', 'Auth', 'ref', 'AuthService',
+  function($scope, $firebaseObject, $firebaseArray, Auth, ref, AuthService) {
     t = $scope;
     $scope.currentUser = AuthService.currentUser(),
     $scope.isLoggedIn = AuthService.isLoggedIn(),
     $scope.items = [];
+    $scope.searchItem;
+    $scope.users = [];
+
+    $scope.Search = function()
+    {
+      //see if searchitem is in database
+      var link = "https://de-bookmarker.firebaseio.com/users";
+      var userRef = new Firebase(link);
+
+      $scope.users = $firebaseArray(userRef);
+
+      $scope.users.$loaded().then(function() {
+        for(var i = 0; i < $scope.users.length; i++)
+        {
+          if ($scope.users[i].name === $scope.searchItem)
+          {
+            alert("success");
+          }
+          else
+          {
+            alert("Fail");
+          }
+        }
+      });
+      console.log($scope.users);
+    };
 
     function getBookmarks(uid) {
       var link = "https://de-bookmarker.firebaseio.com/users/" + uid + "/bookmarks";
