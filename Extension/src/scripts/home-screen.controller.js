@@ -69,8 +69,10 @@ app.controller('HomeScreenCtrl', ['$scope', 'Auth', 'ref', 'AuthService', '$fire
       chrome.bookmarks.getTree(function(itemTree){
         var data = [];
         itemTree.forEach(function(item){
-          item.children[0].children[0].children.forEach(function(bm){
-            data.push(processNode(bm));
+          item.children[0].children.forEach(function(bm){
+            if (bm.url) {
+              data.push(processNode(bm));
+            }
           });
         });
         ref.child("users").child($scope.currentUser).child("bookmarks").update(data);
@@ -79,17 +81,17 @@ app.controller('HomeScreenCtrl', ['$scope', 'Auth', 'ref', 'AuthService', '$fire
 
       function processNode(node) {
         // If there is a child then this node is a folder.
-        if(node.children) {
-          var theChildren = []
-          node.children.forEach(function(child) {
-             theChildren.push(processNode(child));
-          });
-          return {
-            "id" : node.id,
-            "children" : theChildren,
-            "title" : node.title
-          };
-        }
+        // if(node.children) {
+        //   var theChildren = []
+        //   node.children.forEach(function(child) {
+        //      theChildren.push(processNode(child));
+        //   });
+        //   return {
+        //     "id" : node.id,
+        //     "children" : theChildren,
+        //     "title" : node.title
+        //   };
+        // }
 
         // If there is a url then this node is a bookmarked link.
         if(node.url) {
