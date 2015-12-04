@@ -1,6 +1,6 @@
 var t;
-app.controller('HomeScreenCtrl', ['$scope', '$firebaseObject', '$firebaseArray', 'Auth', 'ref', 'AuthService',
-  function($scope, $firebaseObject, $firebaseArray, Auth, ref, AuthService) {
+app.controller('HomeScreenCtrl', ['$scope', 'profilePageService', '$firebaseObject', '$firebaseArray', 'Auth', 'ref', 'AuthService',
+  function($scope, profilePageService, $firebaseObject, $firebaseArray, Auth, ref, AuthService) {
     t = $scope;
     $scope.currentUser = AuthService.currentUser(),
     $scope.isLoggedIn = AuthService.isLoggedIn(),
@@ -17,19 +17,33 @@ app.controller('HomeScreenCtrl', ['$scope', '$firebaseObject', '$firebaseArray',
       $scope.users = $firebaseArray(userRef);
 
       $scope.users.$loaded().then(function() {
+        var found = false;
+        var user;
         for(var i = 0; i < $scope.users.length; i++)
         {
           if ($scope.users[i].name === $scope.searchItem)
           {
-            alert("success");
-          }
-          else
-          {
-            alert("Fail");
+            //save user in service var to load in profile page
+            profilePageService.set($scope.users[i]);
+            found = true;
           }
         }
+
+       //Check if current user, if so do a message?
+
+        if(!found)
+        {
+          prompt("User not found, please search again");
+          console.log("Finished with search. Results: " + found);
+        }
+        else {
+          console.log(profilePageService.get());
+          console.log("Finished with search. Results: " + found);
+          prompt("Test");
+          window.location.href = './profile.html'
+
+        }
       });
-      console.log($scope.users);
     };
 
     function getBookmarks(uid) {

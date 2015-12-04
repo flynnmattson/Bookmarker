@@ -1,12 +1,16 @@
-app.controller('ProfileCtrl', ['$scope', '$firebaseObject', 'Auth', 'ref',
-    function($scope, $firebaseObject, Auth, ref) {
+app.controller('ProfileCtrl', ['$scope', 'profilePageService', '$firebaseObject', 'Auth', 'ref',
+    function($scope, profilePageService, $firebaseObject, Auth, ref) {
 
       /*Declare variables*/
       $scope.addButton = "";
       $scope.subscribeButton = "";
       $scope.profile = "";
 
+      $scope.profile = profilePageService.get();
+      console.log($scope.profile);
+      console.log(profilePageService.get());
 
+      /*
       //Grab user profile --only works for Flynn now!!
       var link = "https://de-bookmarker.firebaseio.com/users/8ffd810f-1ccf-4fba-8441-f197f993749d";
       var userRef = new Firebase(link);
@@ -14,7 +18,7 @@ app.controller('ProfileCtrl', ['$scope', '$firebaseObject', 'Auth', 'ref',
 
       $scope.profile = $firebaseObject(userRef);
 
-      console.log($scope.profile);
+      console.log($scope.profile);*/
       /*
       userRef.on("value", function(snapshot) {
         if(snapshot.val() !== null)

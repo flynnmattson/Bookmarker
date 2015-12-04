@@ -12,6 +12,21 @@ app.factory('Auth', ['$firebaseAuth', 'ref',
   }
 ]);
 
+app.service('profilePageService', function() {
+  var profileToRetreieve = {}
+  function set(data) {
+    profileToRetreieve = data;
+  }
+  function get() {
+    return profileToRetreieve;
+  }
+
+  return {
+    set: set,
+    get: get
+  }
+});
+
 app.factory('AuthService', ['Auth', 'ref',
   function(Auth, ref) {
     return {
