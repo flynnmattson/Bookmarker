@@ -12,12 +12,41 @@ app.factory('Auth', ['$firebaseAuth', 'ref',
   }
 ]);
 
-app.service('profilePageService', function() {
+app.service('profilePageService', ['$firebaseArray', function($firebaseArray) {
   var profileToRetreieve = {}
-  function set(data) {
-    profileToRetreieve = data;
+  function set(searchItem)
+  {
+    //see if searchitem is in database
+    var link = "https://de-bookmarker.firebaseio.com/users";
+    var userRef = new Firebase(link);
+
+    var users = $firebaseArray(userRef);
+
+    users.$loaded().then(function()
+    {
+      var found = false;
+      console.log(users.length);
+      for(var i = 0; i < users.length; i++)
+      {
+        if (users[i].name === searchItem)
+        {
+          //save user in service var to load in profile page
+          prompt("User found");
+          profileToRetreieve = users[i];
+          console.log(profileToRetreieve);
+          found = true;
+        }
+        console.log(users[i]);
+      }
+      if(found == false)
+      {
+        profileToRetreieve = null;
+      }
+    });
   }
-  function get() {
+  function get()
+  {
+    console.log(profileToRetreieve);
     return profileToRetreieve;
   }
 
@@ -25,7 +54,7 @@ app.service('profilePageService', function() {
     set: set,
     get: get
   }
-});
+}]);
 
 app.factory('AuthService', ['Auth', 'ref',
   function(Auth, ref) {

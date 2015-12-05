@@ -1,14 +1,17 @@
-app.controller('ProfileCtrl', ['$scope', 'profilePageService', '$firebaseObject', 'Auth', 'ref',
-    function($scope, profilePageService, $firebaseObject, Auth, ref) {
+app.controller('ProfileCtrl', ['$scope', '$rootScope', 'profilePageService', '$firebaseObject', 'Auth', 'ref',
+    function($scope, $rootScope, profilePageService, $firebaseObject, Auth, ref) {
 
       /*Declare variables*/
       $scope.addButton = "";
       $scope.subscribeButton = "";
       $scope.profile = "";
 
-      $scope.profile = profilePageService.get();
-      console.log($scope.profile);
-      console.log(profilePageService.get());
+
+
+      //$scope.profile = profilePageService.get();
+      //console.log($scope.profile);
+      //console.log(profilePageService.get());
+      console.log($rootScope.profile);
 
       /*
       //Grab user profile --only works for Flynn now!!
