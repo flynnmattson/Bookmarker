@@ -1,4 +1,4 @@
-var app = angular.module('Bookmarker', ['ngRoute', 'ngAnimate', 'ui.bootstrap', 'firebase']);
+var app = angular.module('Bookmarker', ['ngRoute', 'ngAnimate', 'ui.bootstrap', 'checklist-model', 'firebase']);
 
 app.factory('ref', [
   function() {
@@ -24,17 +24,15 @@ app.factory('AuthService', ['Auth', 'ref',
             ).then(function(authData) {
               // if successfull, user has been signed in to his/her account
               //currentUser = authData.uid;
-              return true;
+              console.log("User is logged in");
             }).catch(function(error) {
               // user could not be logged in
               window.location.href = './login.html';
-              return false;
             });
           }
           else {
             // user has not logged in yet
             window.location.href = './login.html';
-            return false;
           }
         });
       },
@@ -43,23 +41,8 @@ app.factory('AuthService', ['Auth', 'ref',
         if (authData) {
           return authData.uid;
         } else {
-          console.log("User is logged out");
+          window.location.href = './login.html';
         }
-      },
-      getBookmarks: function(uid) {
-        var link = "https://de-bookmarker.firebaseio.com/users/" + uid + "/bookmarks";
-        var userRef = new Firebase(link);
-        userRef.on("value" , function(snapshot) {
-          console.log(snapshot.val());
-          if(snapshot.val() !== null)
-            return angular.copy(snapshot.val());
-          else
-            return [];
-        }, function(errorObject) {
-          console.log("The read failed: " + errorObject.code);
-          return [];
-        });
-        return [];
       }
     };
   }

@@ -10,9 +10,13 @@
     <script src="scripts/libs/angular-animate.js"></script>
     <script src="scripts/libs/jquery-2.1.4.min.js"></script>
     <script src="scripts/libs/ui-bootstrap-tpls-0.14.3.min.js"></script>
+    <script src="scripts/libs/checklist-model.js"></script>
+    <script src="scripts/libs/massautocomplete.js"></script>
+    <script src="scripts/libs/angular-sanitize.js"></script>
     <script src="scripts/app.js"></script>
     <script src="scripts/home-screen.controller.js"></script>
 
+    <link href="css/massautocomplete.theme.css" rel="stylesheet">
     <link href="css/bootstrap.css" rel="stylesheet">
     <link href="css/general.css" rel="stylesheet">
 
@@ -24,18 +28,22 @@
       <div class="body-container home-container">
         <br />
 
-        <!-- Search form -->
-        <form class="form-group" ng-submit="Search()" >
-          <div class="input-group">
-              <input type="text" class="form-control" placeholder="Search Bookmarker">
-              <span class="input-group-btn">
-                <button  type="button" class="btn btn-default btn-search">
-                  <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
-                </button>
-              </span>
-            </div>
-        </form>
+          <!-- Share form -->
+          <form ng-if="selectedBookmarks.length != 0" class="form-group" align="right" ng-submit="Share()" >
+            <button type="button" class="btn btn-default btn-halfSize btn-share">Share</button>
+          </form>
 
+          <!-- Search form -->
+          <form ng-if="selectedBookmarks.length == 0" class="form-group" ng-submit="Search()" >
+            <div class="input-group">
+                <input type="text" class="form-control" placeholder="Search for friends">
+                <span class="input-group-btn">
+                  <button  type="button" class="btn btn-default btn-search">
+                    <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+                  </button>
+                </span>
+              </div>
+          </form>
 
           <script type="text/ng-template" id="group-template.html">
             <div class="panel {{panelClass || 'panel-default'}}">
@@ -73,12 +81,11 @@
               <uib-accordion-heading ng-click="my_bookmarks.open = !my_bookmarks.open">
                 My Bookmarks <i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': my_bookmarks.open, 'glyphicon-chevron-right': !my_bookmarks.open}"></i>
               </uib-accordion-heading>
-              <button ng-if="items.length == 0" type="button" class="btn btn-default btn-sm" ng-click="linkBookmarks()">Sync Local Bookmarks!</button>
-              <ul ng-repeat="item in items">
-                <li>
-                  <a ng-click="createTab(item.url)">{{item.title}}</a>
-                </li>
-              </ul>
+              <button ng-if="mybookmarks.length == 0" type="button" class="btn btn-default btn-sm" ng-click="copyBookmarksFromChrome()">Sync Local Bookmarks!</button>
+              <div ng-repeat="bookmark in mybookmarks">
+                    <input type="checkbox" checklist-model="selectedBookmarks" checklist-value="bookmark">
+                    <a ng-click="OpenBookmarkLink(bookmark.url)">{{bookmark.title}}</a>
+              </div>
             </uib-accordion-group>
           </uib-accordion>
         </div>
