@@ -18,17 +18,17 @@
 
   </head>
 
-  <body>
+  <body  ng-app="Bookmarker" ng-controller="ProfileCtrl" ng-init="loadButtons()">
 
     <div class="body-container">
 
       <div style="width:100%">
       <img src="./images/backArrow.png" alt="Go back" ng-click="goBack()"
       style="width:60px; height:60px; padding-top:10px">
-      <h3 align="right" style="float:right">User Name</h3>
+      <h3 align="right" style="float:right">{{profile.name}}</h3>
     </div>
 
-      <div ng-app="Bookmarker" ng-controller="ProfileCtrl" ng-init="loadButtons()">
+      <div>
 
           <div align="center" style="margin-bottom:10px;">
             <img src="./images/bluehead.png" alt="Profile Picture" style="width:80px;height:80px;">
@@ -45,7 +45,7 @@
             style="color:white">
             {{subscribeButton}}
           </button>
-          <h4>User's Live Feed</h4>
+          <!--<h4>User's Live Feed</h4>-->
           <!--Pull live feed from db-->
       </div>
     </div>

@@ -1,6 +1,10 @@
-app.controller('DashboardCtrl', ['$scope', 'Auth', 'ref',
-    function($scope, Auth, ref) {
+app.controller('DashboardCtrl', ['$scope', '$cookies', 'Auth', 'ref',
+    function($scope, $cookies, Auth, ref) {
       $scope.showForm = false;
+
+      //$scope.currentUser = $cookies.get('AUTH_TOKEN');
+
+      console.log($scope.currentUser);
     // close an specified alert message
     $scope.closeAlert = function(index) {
       $scope.alerts.splice(index, 1);

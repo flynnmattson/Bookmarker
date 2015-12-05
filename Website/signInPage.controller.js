@@ -29,7 +29,7 @@ app.controller('LoginCtrl', ['$scope', 'Auth', 'ref',
         }).then(function(authData) {
           // if successfull, user has been signed in to his/her account
           // store the Firebase authentication token for this session
-          chrome.storage.local.set({'AUTH_TOKEN': authData.token});
+          //$cookies.put('AUTH_TOKEN', authData.token);
           // redirect user to the home screen
           window.location.href = 'dashboard.html';
 

@@ -1,4 +1,4 @@
-var app = angular.module('Bookmarker', ['ngRoute', 'ngAnimate', 'ui.bootstrap', 'firebase']);
+var app = angular.module('Bookmarker', ['ngRoute', 'ngCookies', 'ngAnimate', 'ui.bootstrap', 'firebase']);
 
 app.factory('Auth', ['$firebaseAuth',
   function($firebaseAuth) {
@@ -12,3 +12,9 @@ app.factory('ref', [
     return new Firebase('https://de-bookmarker.firebaseio.com/');
   }
 ]);
+
+
+app.config()
+{
+  
+}
