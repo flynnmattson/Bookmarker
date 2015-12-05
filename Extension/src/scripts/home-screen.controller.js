@@ -2,8 +2,9 @@ var t;
 
 app.controller('HomeScreenCtrl', ['$scope', '$rootScope', '$firebaseObject', '$firebaseArray', 'Auth', 'ref', 'AuthService',
   function($scope, $rootScope, $firebaseObject, $firebaseArray, Auth, ref, AuthService) {
+
     t = $scope;
-    $scope.searchItem;
+    $scope.searchItem = '';
     $scope.users = [];
     $scope.hideProfile = true;
     $scope.hideHome = false;
@@ -14,7 +15,27 @@ app.controller('HomeScreenCtrl', ['$scope', '$rootScope', '$firebaseObject', '$f
     if($scope.currentUser){
       getBookmarks($scope.currentUser);
       $scope.selectedBookmarks = [];
+
+      $scope.dirty = {};
+      var states = ['Alabama', 'Alaska', 'California'];
+      $scope.autocomplete_options = {
+        suggest: suggest_state
+      };
+
     }
+
+    function suggest_state(term) {
+      var q = term.toLowerCase().trim();
+      var results = [];
+
+      for (var i = 0; i < states.length; i++) {
+        var state = states[i];
+        if (state.toLowerCase().indexOf(q) === 0)
+          results.push({ label: state, value: state });
+      }
+      return results;
+    }
+
 
     $scope.Search = function()
     {
