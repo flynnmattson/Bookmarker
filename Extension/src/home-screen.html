@@ -23,115 +23,114 @@
   <body>
 
     <div ng-app="Bookmarker" ng-controller="HomeScreenCtrl" ng-init="loadButtons()">
-      <div class="body-container home-container">
+      <div ng-if="showHome" class="body-container home-container">
         <br />
 
-          <!-- Share form -->
-          <form ng-if="selectedBookmarks.length != 0" class="form-group" align="right" ng-submit="Share()" >
-            <button type="button" class="btn btn-default btn-halfSize btn-share">Share</button>
-          </form>
+        <!-- Share form -->
+        <form ng-if="selectedBookmarks.length != 0" class="form-group" align="right" ng-submit="Share()" >
+          <button type="button" class="btn btn-default btn-halfSize btn-share">Share</button>
+        </form>
 
-          <!-- Search form -->
-          <form ng-if="selectedBookmarks.length == 0" class="form-group" ng-submit="Search()" >
-            <div class="input-group">
-                <input type="text" class="form-control" placeholder="Search for friends">
-                <span class="input-group-btn">
-                  <button  type="button" class="btn btn-default btn-search">
-                    <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
-                  </button>
-                </span>
-              </div>
-          </form>
-
-          <script type="text/ng-template" id="group-template.html">
-            <div class="panel {{panelClass || 'panel-default'}}">
-              <div class="panel-heading">
-                <h4 class="panel-title" style="color:#fa39c3">
-                  <a href tabindex="0" class="accordion-toggle" ng-click="toggleOpen()" uib-accordion-transclude="heading"><span
-                    ng-class="{'text-muted': isDisabled}">{{heading}}</span></a>
-                </h4>
-              </div>
-              <div class="panel-collapse collapse" uib-collapse="!isOpen">
-                <div class="panel-body" style="text-align: right" ng-transclude></div>
-              </div>
-            </div>
-          </script>
-
-          <uib-accordion close-others="false">
-            <!-- My Subscriptions -->
-            <uib-accordion-group panel-class="panel-my-subscriptions"  is-open="my_subscriptions.open">
-              <uib-accordion-heading ng-click="my_subscriptions.open = !my_subscriptions.open">
-                My Subscriptions <i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': my_subscriptions.open, 'glyphicon-chevron-right': !my_subscriptions.open}"></i>
-              </uib-accordion-heading>
-              Your Live feeds go here...
-            </uib-accordion-group>
-
-            <!-- Shared With Me -->
-            <uib-accordion-group panel-class="panel-shared-with-me" is-open="shared_with_me.open">
-              <uib-accordion-heading ng-click="shared_with_me.open = !shared_with_me.open">
-                Shared With Me <i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': shared_with_me.open, 'glyphicon-chevron-right': !shared_with_me.open}"></i>
-              </uib-accordion-heading>
-              Your Inbox of bookmarks are here...
-            </uib-accordion-group>
-
-            <!-- My Bookmarks -->
-            <uib-accordion-group panel-class="panel-my-bookmarks" is-open="my_bookmarks.open">
-              <uib-accordion-heading ng-click="my_bookmarks.open = !my_bookmarks.open">
-                My Bookmarks <i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': my_bookmarks.open, 'glyphicon-chevron-right': !my_bookmarks.open}"></i>
-              </uib-accordion-heading>
-              <button ng-if="mybookmarks.length == 0" type="button" class="btn btn-default btn-sm" ng-click="copyBookmarksFromChrome()">Sync Local Bookmarks!</button>
-              <div ng-repeat="bookmark in mybookmarks">
-                    <input type="checkbox" checklist-model="selectedBookmarks" checklist-value="bookmark">
-                    <a ng-click="OpenBookmarkLink(bookmark.url)">{{bookmark.title}}</a>
-              </div>
-              <button ng-click="addcurrentWindow()">+</button>
-            </uib-accordion-group>
-          </uib-accordion>
-        </div>
-
-        <div class="footer-container" align="center">
-          <div class="row">
-            Bookmarker
-            <button type="button" class="btn btn-default btn-signout" title="Sign out" ng-click="logout()">
-              <span class="glyphicon glyphicon-log-out" aria-hidden="true"></span>
-            </button>
+        <!-- Search form -->
+        <form ng-if="selectedBookmarks.length == 0" class="form-group" ng-submit="Search()" >
+          <div class="input-group">
+            <input type="text" class="form-control" ng-model="searchName" placeholder="Search for friends">
+            <span class="input-group-btn">
+              <button type="submit" class="btn btn-default btn-search">
+                <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+              </button>
+            </span>
           </div>
+        </form>
+
+        <script type="text/ng-template" id="group-template.html">
+          <div class="panel {{panelClass || 'panel-default'}}">
+            <div class="panel-heading">
+              <h4 class="panel-title" style="color:#fa39c3">
+                <a href tabindex="0" class="accordion-toggle" ng-click="toggleOpen()" uib-accordion-transclude="heading"><span
+                  ng-class="{'text-muted': isDisabled}">{{heading}}</span></a>
+              </h4>
+            </div>
+            <div class="panel-collapse collapse" uib-collapse="!isOpen">
+              <div class="panel-body" style="text-align: right" ng-transclude></div>
+            </div>
+          </div>
+        </script>
+
+        <uib-accordion close-others="false">
+          <!-- My Subscriptions -->
+          <uib-accordion-group panel-class="panel-my-subscriptions"  is-open="my_subscriptions.open">
+            <uib-accordion-heading ng-click="my_subscriptions.open = !my_subscriptions.open">
+              My Subscriptions <i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': my_subscriptions.open, 'glyphicon-chevron-right': !my_subscriptions.open}"></i>
+            </uib-accordion-heading>
+            Your Live feeds go here...
+          </uib-accordion-group>
+
+          <!-- Shared With Me -->
+          <uib-accordion-group panel-class="panel-shared-with-me" is-open="shared_with_me.open">
+            <uib-accordion-heading ng-click="shared_with_me.open = !shared_with_me.open">
+              Shared With Me <i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': shared_with_me.open, 'glyphicon-chevron-right': !shared_with_me.open}"></i>
+            </uib-accordion-heading>
+            Your Inbox of bookmarks are here...
+          </uib-accordion-group>
+
+          <!-- My Bookmarks -->
+          <uib-accordion-group panel-class="panel-my-bookmarks" is-open="my_bookmarks.open">
+            <uib-accordion-heading ng-click="my_bookmarks.open = !my_bookmarks.open">
+              My Bookmarks <i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': my_bookmarks.open, 'glyphicon-chevron-right': !my_bookmarks.open}"></i>
+            </uib-accordion-heading>
+            <button ng-if="mybookmarks.length == 0" type="button" class="btn btn-default btn-sm" ng-click="copyBookmarksFromChrome()">Sync Local Bookmarks!</button>
+            <div ng-repeat="bookmark in mybookmarks">
+                  <input type="checkbox" checklist-model="selectedBookmarks" checklist-value="bookmark">
+                  <a ng-click="OpenBookmarkLink(bookmark.url)">{{bookmark.title}}</a>
+            </div>
+            <button ng-click="addcurrentWindow()">+</button>
+          </uib-accordion-group>
+        </uib-accordion>
+      </div>
+
+      <!---->
+      <!---->
+      <!--PROFILE PAGE *** PROFILE PAGE *** PROFILE PAGE *** PROFILE PAGE *** PROFILE PAGE-->
+      <!---->
+      <!---->
+      <div ng-if="showProfile" class="body-container">
+
+        <div style="width:100%">
+          <img src="./images/backArrow.png" alt="Go back" ng-click="goBack()"
+          style="width:60px; height:60px; padding-top:10px">
+          <h3 align="right" style="float:right">{{profile.name}}</h3>
         </div>
-        <!---->
-        <!---->
-        <!--PROFILE PAGE *** PROFILE PAGE *** PROFILE PAGE *** PROFILE PAGE *** PROFILE PAGE-->
-        <!---->
-        <!---->
-        <div class="body-container">
 
-                <div style="width:100%">
-                <img src="./images/backArrow.png" alt="Go back" ng-click="goBack()"
-                style="width:60px; height:60px; padding-top:10px">
-                <h3 align="right" style="float:right">{{profile.name}}</h3>
-              </div>
+        <div>
+          <div align="center" style="margin-bottom:10px;">
+            <img src="./images/bluehead.png" alt="Profile Picture" style="width:80px;height:80px;">
+          </div>
+            <button
+            type="button" ng-click="updateAddButton()"
+            class="btn btn-default btn-size49 btn-margin2 btn-add"
+            style="color:white">
+            {{addButton}}
+          </button>
+            <button
+            type="button" ng-click="updateSubscribeButton()"
+            class="btn btn-default btn-size49 btn-margin2 btn-add"
+            style="color:white">
+            {{subscribeButton}}
+          </button>
+          <!--<h4>User's Live Feed</h4>-->
+          <!--Pull live feed from db-->
+        </div>
+      </div>
 
-                <div>
-
-                    <div align="center" style="margin-bottom:10px;">
-                      <img src="./images/bluehead.png" alt="Profile Picture" style="width:80px;height:80px;">
-                    </div>
-                      <button
-                      type="button" ng-click="updateAddButton()"
-                      class="btn btn-default btn-size49 btn-margin2 btn-add"
-                      style="color:white">
-                      {{addButton}}
-                    </button>
-                      <button
-                      type="button" ng-click="updateSubscribeButton()"
-                      class="btn btn-default btn-size49 btn-margin2 btn-add"
-                      style="color:white">
-                      {{subscribeButton}}
-                    </button>
-                    <!--<h4>User's Live Feed</h4>-->
-                    <!--Pull live feed from db-->
-                </div>
-              </div>
+      <div class="footer-container" align="center">
+        <div class="row">
+          Bookmarker
+          <button type="button" class="btn btn-default btn-signout" title="Sign out" ng-click="logout()">
+            <span class="glyphicon glyphicon-log-out" aria-hidden="true"></span>
+          </button>
+        </div>
+      </div>
     </div>
-
   </body>
 </html>

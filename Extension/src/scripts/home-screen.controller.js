@@ -3,10 +3,10 @@ var t;
 app.controller('HomeScreenCtrl', ['$scope', '$rootScope', '$firebaseObject', '$firebaseArray', 'Auth', 'ref', 'AuthService',
   function($scope, $rootScope, $firebaseObject, $firebaseArray, Auth, ref, AuthService) {
     t = $scope;
-    $scope.searchItem;
+    $scope.searchName;
     $scope.users = [];
-    $scope.hideProfile = true;
-    $scope.hideHome = false;
+    $scope.showProfile = false;
+    $scope.showHome = true;
 
     AuthService.isLoggedIn(),
     $scope.currentUser = AuthService.currentUser()
@@ -18,31 +18,26 @@ app.controller('HomeScreenCtrl', ['$scope', '$rootScope', '$firebaseObject', '$f
 
     $scope.Search = function()
     {
+      console.log("Searching...");
+      console.log($scope.searchName);
       //see if searchitem is in database
       var link = "https://de-bookmarker.firebaseio.com/users";
       var userRef = new Firebase(link);
 
-      $scope.users = $firebaseArray(userRef);
-
-      $scope.users.$loaded().then(function()
-      {
+      $firebaseArray(userRef).$loaded().then(function(data) {
+        $scope.users = data;
+        console.log($scope.users);
         var found = false;
-        var user;
         for(var i = 0; i < $scope.users.length; i++)
         {
-          prompt("Entering for loop");
-          if ($scope.users[i].name === $scope.searchItem)
+          if ($scope.users[i].name === $scope.searchName)
           {
-            prompt("User found");
             //save user in service var to load in profile page
             $scope.profile = $scope.users[i];
             console.log($scope.profile);
             found = true;
-            hideHome = true;
-            hideProfile = false;
-          }
-          else {
-            prompt("User not found");
+            showHome = false;
+            showProfile = true;
           }
         }
 
