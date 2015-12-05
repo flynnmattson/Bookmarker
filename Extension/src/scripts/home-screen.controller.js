@@ -1,14 +1,20 @@
 var t;
+
 app.controller('HomeScreenCtrl', ['$scope', '$rootScope', '$firebaseObject', '$firebaseArray', 'Auth', 'ref', 'AuthService',
   function($scope, $rootScope, $firebaseObject, $firebaseArray, Auth, ref, AuthService) {
     t = $scope;
-    $scope.currentUser = AuthService.currentUser(),
-    $scope.isLoggedIn = AuthService.isLoggedIn(),
-    $scope.items = [];
     $scope.searchItem;
     $scope.users = [];
     $scope.hideProfile = true;
     $scope.hideHome = false;
+
+    AuthService.isLoggedIn(),
+    $scope.currentUser = AuthService.currentUser()
+
+    if($scope.currentUser){
+      getBookmarks($scope.currentUser);
+      $scope.selectedBookmarks = [];
+    }
 
     $scope.Search = function()
     {
@@ -45,15 +51,8 @@ app.controller('HomeScreenCtrl', ['$scope', '$rootScope', '$firebaseObject', '$f
           prompt("User not found, please search again");
           console.log("Finished with search. Results: " + found);
         }
-    });
-  };
-
-    // collect the user's bookmarks
-    var link = "https://de-bookmarker.firebaseio.com/users/" + $scope.currentUser + "/bookmarks";
-    var userRef = new Firebase(link);
-    $firebaseArray(userRef).$loaded().then(function(data) {
-      $scope.items = data;
-    });
+      });
+    };
 
     // unauthenticate user and remove token from local storage
     $scope.logout = function() {
@@ -73,18 +72,18 @@ app.controller('HomeScreenCtrl', ['$scope', '$rootScope', '$firebaseObject', '$f
       }
     };
 
+    function getBookmarks(uid) {
+      var bookmarkslink = "https://de-bookmarker.firebaseio.com/users/" + uid + "/bookmarks";
+      var bookmarksRef = new Firebase(bookmarkslink);
+      $scope.mybookmarks = $firebaseArray(bookmarksRef);
+    }
 
-    // Gives you the URL of the current tab on the browser.
-    chrome.tabs.getSelected(null, function(tab){
-      $scope.currentTab = tab.url;
-    });
-
-    // Creates a new tab in the browser.
-    $scope.createTab = function createTab(link) {
+    // open a bookmark in a new tab in the browser.
+    $scope.OpenBookmarkLink = function OpenBookmarkLink(link) {
       chrome.tabs.create({"url":link});
     };
 
-    $scope.linkBookmarks = function() {
+    $scope.copyBookmarksFromChrome = function() {
       chrome.bookmarks.getTree(function(itemTree){
         var data = [];
         itemTree.forEach(function(item){
