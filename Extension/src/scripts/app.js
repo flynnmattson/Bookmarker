@@ -12,8 +12,8 @@ app.factory('Auth', ['$firebaseAuth', 'ref',
   }
 ]);
 
-app.factory('AuthService', ['Auth', 'ref',
-  function(Auth, ref) {
+app.factory('AuthService', ['Auth', 'ref', '$firebaseArray',
+  function(Auth, ref, $firebaseArray) {
     return {
       isLoggedIn: function() {
         chrome.storage.local.get('AUTH_TOKEN', function (result) {
@@ -49,17 +49,8 @@ app.factory('AuthService', ['Auth', 'ref',
       getBookmarks: function(uid) {
         var link = "https://de-bookmarker.firebaseio.com/users/" + uid + "/bookmarks";
         var userRef = new Firebase(link);
-        userRef.on("value" , function(snapshot) {
-          console.log(snapshot.val());
-          if(snapshot.val() !== null)
-            return angular.copy(snapshot.val());
-          else
-            return [];
-        }, function(errorObject) {
-          console.log("The read failed: " + errorObject.code);
-          return [];
-        });
-        return [];
+        var data = $firebaseArray(userRef);
+        console.log(data);
       }
     };
   }

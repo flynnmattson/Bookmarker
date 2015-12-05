@@ -6,34 +6,11 @@ app.controller('HomeScreenCtrl', ['$scope', 'Auth', 'ref', 'AuthService', '$fire
     $scope.isLoggedIn = AuthService.isLoggedIn(),
     $scope.items = [];
 
-    function getBookmarks(uid) {
-      var link = "https://de-bookmarker.firebaseio.com/users/" + uid + "/bookmarks";
-      var userRef = new Firebase(link);
-      userRef.on("value" , function(snapshot) {
-        if(snapshot.val() !== null) {
-          angular.copy(snapshot.val(), $scope.items);
-          $scope.$apply();
-          return;
-        }
-      }, function(errorObject) {
-        console.log("The read failed: " + errorObject.code);
-      });
-      $scope.items = [];
-    }
-
-    //getBookmarks($scope.currentUser);
+    // collect the user's bookmarks
     var link = "https://de-bookmarker.firebaseio.com/users/" + $scope.currentUser + "/bookmarks";
     var userRef = new Firebase(link);
-    $scope.items = $firebaseArray(userRef);
-    console.log($scope.items);
-
-    // Now using AuthService factory that includes awesome methods!!
-    $scope.$watch(AuthService.isLoggedIn, function(isLoggedIn) {
-      $scope.isLoggedIn = isLoggedIn;
-    });
-    // Retrieves the current user uid
-    $scope.$watch(AuthService.currentUser, function(currentUser) {
-      $scope.currentUser = currentUser;
+    $firebaseArray(userRef).$loaded().then(function(data) {
+      $scope.items = data;
     });
 
     // unauthenticate user and remove token from local storage
@@ -69,6 +46,8 @@ app.controller('HomeScreenCtrl', ['$scope', 'Auth', 'ref', 'AuthService', '$fire
       chrome.bookmarks.getTree(function(itemTree){
         var data = [];
         itemTree.forEach(function(item){
+          // Currently this only grabs the bookmarks in your Bookmarks bar folder from the tree that the API gives you
+          // !!!does not grab folders.
           item.children[0].children.forEach(function(bm){
             if (bm.url) {
               data.push(processNode(bm));
@@ -103,6 +82,12 @@ app.controller('HomeScreenCtrl', ['$scope', 'Auth', 'ref', 'AuthService', '$fire
           };
         }
       }
+    };
+
+    $scope.addCurrentWindow = function() {
+      chrome.tabs.getSelected(null, function(currentTab) {
+        console.log(currentTab);
+      });
     };
   }
 ]);
