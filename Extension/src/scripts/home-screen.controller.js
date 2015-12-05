@@ -1,10 +1,9 @@
 var t;
 
-app.controller('HomeScreenCtrl', ['$scope', '$rootScope', '$firebaseObject', '$firebaseArray', 'Auth', 'ref', 'AuthService',
-  function($scope, $rootScope, $firebaseObject, $firebaseArray, Auth, ref, AuthService) {
+app.controller('HomeScreenCtrl', ['$scope', '$rootScope', '$sce', '$q', '$firebaseObject', '$firebaseArray', 'Auth', 'ref', 'AuthService',
+  function($scope, $rootScope, $sce, $q, $firebaseObject, $firebaseArray, Auth, ref, AuthService) {
 
     t = $scope;
-    $scope.searchItem = '';
     $scope.users = [];
     $scope.hideProfile = true;
     $scope.hideHome = false;
@@ -13,27 +12,54 @@ app.controller('HomeScreenCtrl', ['$scope', '$rootScope', '$firebaseObject', '$f
     $scope.currentUser = AuthService.currentUser()
 
     if($scope.currentUser){
+
       getBookmarks($scope.currentUser);
+      //getFriends($scope.currentUser)
+      $scope.friends = [{id: "1", name: "Dalia"}, {id: "2", name: "Flynn"}];
+
       $scope.selectedBookmarks = [];
+      $scope.selectedFriends = [];
 
       $scope.dirty = {};
-      var states = ['Alabama', 'Alaska', 'California'];
       $scope.autocomplete_options = {
-        suggest: suggest_state
+        suggest: suggest_friend_as_tag,
+        on_select: function (selected) {
+          $scope.selected_user = selected.obj;
+        }
       };
-
     }
 
-    function suggest_state(term) {
+    function suggest_friend_as_tag(term) {
       var q = term.toLowerCase().trim();
       var results = [];
 
-      for (var i = 0; i < states.length; i++) {
-        var state = states[i];
-        if (state.toLowerCase().indexOf(q) === 0)
-          results.push({ label: state, value: state });
+      for (var i = 0; i < $scope.friends.length; i++) {
+        var friend = $scope.friends[i];
+        if (friend.name.toLowerCase().indexOf(q) === 0)
+          results.push({
+            value: friend.name,
+            obj: friend,
+            label: $sce.trustAsHtml(
+              '<div>'+
+                '<span class="glyphicon glyphicon-user" aria-hidden="true"></span> ' + 
+                highlight(friend.name,term) +
+              '</div>'
+            )
+          });
       }
       return results;
+    }
+
+    function highlight(str, term) {
+      var highlight_regex = new RegExp('(' + term + ')', 'gi');
+      return str.replace(highlight_regex,
+        '<span class="highlight">$1</span>');
+    };
+
+    function getFriends(uid) {
+      var friendslink = "https://de-bookmarker.firebaseio.com/users/" + uid + "/friends";
+      var friendsRef = new Firebase(friendslink);
+      $scope.friends = $firebaseArray(friendsRef);
     }
 
 
