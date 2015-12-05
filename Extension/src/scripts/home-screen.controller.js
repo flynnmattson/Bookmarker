@@ -3,7 +3,6 @@ var t;
 app.controller('HomeScreenCtrl', ['$scope', '$rootScope', '$firebaseObject', '$firebaseArray', 'Auth', 'ref', 'AuthService',
   function($scope, $rootScope, $firebaseObject, $firebaseArray, Auth, ref, AuthService) {
     t = $scope;
-    $scope.searchName;
     $scope.users = [];
     $scope.showProfile = false;
     $scope.showHome = true;
@@ -16,10 +15,8 @@ app.controller('HomeScreenCtrl', ['$scope', '$rootScope', '$firebaseObject', '$f
       $scope.selectedBookmarks = [];
     }
 
-    $scope.Search = function()
+    $scope.Search = function(searchName)
     {
-      console.log("Searching...");
-      console.log($scope.searchName);
       //see if searchitem is in database
       var link = "https://de-bookmarker.firebaseio.com/users";
       var userRef = new Firebase(link);
@@ -30,7 +27,7 @@ app.controller('HomeScreenCtrl', ['$scope', '$rootScope', '$firebaseObject', '$f
         var found = false;
         for(var i = 0; i < $scope.users.length; i++)
         {
-          if ($scope.users[i].name === $scope.searchName)
+          if ($scope.users[i].name === searchName)
           {
             //save user in service var to load in profile page
             $scope.profile = $scope.users[i];

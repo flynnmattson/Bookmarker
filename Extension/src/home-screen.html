@@ -32,7 +32,7 @@
         </form>
 
         <!-- Search form -->
-        <form ng-if="selectedBookmarks.length == 0" class="form-group" ng-submit="Search()" >
+        <form ng-if="selectedBookmarks.length == 0" class="form-group" ng-submit="Search(searchName)" >
           <div class="input-group">
             <input type="text" class="form-control" ng-model="searchName" placeholder="Search for friends">
             <span class="input-group-btn">
