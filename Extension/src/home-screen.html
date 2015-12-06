@@ -31,8 +31,23 @@
         <!-- Share form -->
         <form ng-if="selectedBookmarks.length != 0" class="form-group" ng-submit="Share()" >
           <div mass-autocomplete>
-            <input ng-model="dirty.value" mass-autocomplete-item="autocomplete_options">
-            <button type="submit" class="btn btn-default btn-share">Share</button>
+            <div class="input-group">
+              <span class="input-group-addon addon-search">Share with:</span></span>
+              <input ng-model="shareInput.value" mass-autocomplete-item="autocomplete_share_options" class="form-control" placeholder="Type the name of a friend...">
+            </div>
+          </div>
+
+          <div ng-if="selectedFriends.length != 0">
+            <div class="bs-callout">
+              <span ng-repeat="friend in selectedFriends">
+                <label class="label label-default">{{friend.name}}</label>
+              </span>
+            </div>
+            <div align="right">
+              <button type="submit" class="btn btn-default btn-lg btn-share">
+                <span class="glyphicon glyphicon-share-alt" aria-hidden="true"></span> SHARE
+              </button>
+            </div>
           </div>
         </form>
 
@@ -84,7 +99,7 @@
             <uib-accordion-heading ng-click="my_bookmarks.open = !my_bookmarks.open">
               My Bookmarks <i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': my_bookmarks.open, 'glyphicon-chevron-right': !my_bookmarks.open}"></i>
             </uib-accordion-heading>
-            <button ng-if="mybookmarks.length == 0" type="button" class="btn btn-default btn-sm" ng-click="copyBookmarksFromChrome()">Sync Local Bookmarks!</button>
+            <button ng-if="mybookmarks == null" type="button" class="btn btn-default btn-sm" ng-click="copyBookmarksFromChrome()">Sync Local Bookmarks!</button>
             <div ng-repeat="bookmark in mybookmarks">
                   <input type="checkbox" checklist-model="selectedBookmarks" checklist-value="bookmark">
                   <a ng-click="OpenBookmarkLink(bookmark.url)">{{bookmark.title}}</a>

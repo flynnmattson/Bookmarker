@@ -4,32 +4,27 @@ app.controller('HomeScreenCtrl', ['$scope', '$rootScope', '$sce', '$q', '$fireba
   function($scope, $rootScope, $sce, $q, $firebaseObject, $firebaseArray, Auth, ref, AuthService) {
 
     t = $scope;
-    $scope.users = [];
     $scope.showProfile = false;
     $scope.showHome = true;
 
-    AuthService.isLoggedIn(),
-    $scope.currentUser = AuthService.currentUser()
+    AuthService.isLoggedIn();
+    $scope.currentUser = AuthService.currentUser();
 
     if($scope.currentUser){
 
-      getBookmarks($scope.currentUser);
-      //getFriends($scope.currentUser)
-      $scope.friends = [{id: "1", name: "Dalia"}, {id: "2", name: "Flynn"}];
-
+      getUsers();
       $scope.selectedBookmarks = [];
       $scope.selectedFriends = [];
 
-      $scope.dirty = {};
-      $scope.autocomplete_options = {
-        suggest: suggest_friend_as_tag,
-        on_select: function (selected) {
-          $scope.selected_user = selected.obj;
-        }
+      $scope.shareInput = {};
+      $scope.autocomplete_share_options = {
+        suggest: suggest_friend,
+        on_select: select_friend
       };
     }
 
-    function suggest_friend_as_tag(term) {
+    // suggest friends to share bookmarks with based on user's input and friends list
+    function suggest_friend(term) {
       var q = term.toLowerCase().trim();
       var results = [];
 
@@ -42,7 +37,7 @@ app.controller('HomeScreenCtrl', ['$scope', '$rootScope', '$sce', '$q', '$fireba
             label: $sce.trustAsHtml(
               '<div>'+
                 '<span class="glyphicon glyphicon-user" aria-hidden="true"></span> ' +
-                highlight(friend.name,term) +
+                friend.name +
               '</div>'
             )
           });
@@ -50,16 +45,59 @@ app.controller('HomeScreenCtrl', ['$scope', '$rootScope', '$sce', '$q', '$fireba
       return results;
     }
 
-    function highlight(str, term) {
-      var highlight_regex = new RegExp('(' + term + ')', 'gi');
-      return str.replace(highlight_regex,
-        '<span class="highlight">$1</span>');
+    // select friend to share bookmarks with
+    function select_friend(selected) {
+      $scope.selectedFriends.push({id: selected.obj.$id, name: selected.value});
+      $scope.shareInput.value = undefined;
+
+      console.log($scope.selectedFriends);
+      console.log($scope.selectedBookmarks);
     };
 
+    // get the list of bookmarks for the current user
+    function getBookmarks(uid) {
+      var index = $scope.users.$indexFor(uid);
+      $scope.mybookmarks = $scope.users[index].bookmarks;
+    }
+
+    // get the list of bookmarks shared with the current user
+    function getShares(uid) {
+      var shareslink = "https://de-bookmarker.firebaseio.com/shares/" + uid;
+      var sharesRef = new Firebase(shareslink);
+
+      $firebaseArray(sharesRef).$loaded().then(function(data) {
+        $scope.sharedWithMe = data;
+        console.log($scope.sharedWithMe);
+      });
+    }
+
+    // get the list of friends for the current user
     function getFriends(uid) {
-      var friendslink = "https://de-bookmarker.firebaseio.com/users/" + uid + "/friends";
-      var friendsRef = new Firebase(friendslink);
-      $scope.friends = $firebaseArray(friendsRef);
+      $scope.friends = [];
+      var index = $scope.users.$indexFor(uid);
+      $scope.friends.push($scope.users[index].friends);
+
+      for(var i = 0; i < $scope.users.length; i++) {
+        if($scope.friends[0].hasOwnProperty($scope.users.$keyAt(i))){
+          $scope.friends.push($scope.users[i]);
+        }
+      }
+      $scope.friends.shift();
+    }
+
+    // retrieve the full list of users in to an array
+    function getUsers() {
+      var userslink = "https://de-bookmarker.firebaseio.com/users";
+      var usersRef = new Firebase(userslink);
+
+      $firebaseArray(usersRef).$loaded().then(function(data) {
+        $scope.users = data;
+
+        // set variables for current (logged) user
+        getBookmarks($scope.currentUser);
+        getShares($scope.currentUser);
+        getFriends($scope.currentUser);
+      });
     }
 
     $scope.Search = function(searchName)
@@ -95,6 +133,20 @@ app.controller('HomeScreenCtrl', ['$scope', '$rootScope', '$sce', '$q', '$fireba
       });
     };
 
+    $scope.Share = function()
+    {
+      for(var i = 0; i < $scope.selectedFriends.length; i++) {
+        var data = [];
+        $scope.selectedBookmarks.forEach(function(item){
+          data.push(processNode(item));
+        });
+        ref.child("shares").child($scope.selectedFriends[i].id).child($scope.currentUser).update(data);
+      }
+      $scope.selectedBookmarks = [];
+      $scope.selectedFriends = [];
+      alert("Bookmarks sent!");
+    }
+
     // unauthenticate user and remove token from local storage
     $scope.logout = function() {
       // sign out user
@@ -112,12 +164,6 @@ app.controller('HomeScreenCtrl', ['$scope', '$rootScope', '$sce', '$q', '$fireba
         });
       }
     };
-
-    function getBookmarks(uid) {
-      var bookmarkslink = "https://de-bookmarker.firebaseio.com/users/" + uid + "/bookmarks";
-      var bookmarksRef = new Firebase(bookmarkslink);
-      $scope.mybookmarks = $firebaseArray(bookmarksRef);
-    }
 
     // open a bookmark in a new tab in the browser.
     $scope.OpenBookmarkLink = function OpenBookmarkLink(link) {
@@ -139,32 +185,32 @@ app.controller('HomeScreenCtrl', ['$scope', '$rootScope', '$sce', '$q', '$fireba
         ref.child("users").child($scope.currentUser).child("bookmarks").update(data);
         getBookmarks($scope.currentUser);
       });
-
-      function processNode(node) {
-        // If there is a child then this node is a folder.
-        // if(node.children) {
-        //   var theChildren = []
-        //   node.children.forEach(function(child) {
-        //      theChildren.push(processNode(child));
-        //   });
-        //   return {
-        //     "id" : node.id,
-        //     "children" : theChildren,
-        //     "title" : node.title
-        //   };
-        // }
-
-        // If there is a url then this node is a bookmarked link.
-        if(node.url) {
-          return {
-            "id" : node.id,
-            "parentId" : node.parentId,
-            "title" : node.title,
-            "url" : node.url
-          };
-        }
-      }
     };
+
+    function processNode(node) {
+      // If there is a child then this node is a folder.
+      // if(node.children) {
+      //   var theChildren = []
+      //   node.children.forEach(function(child) {
+      //      theChildren.push(processNode(child));
+      //   });
+      //   return {
+      //     "id" : node.id,
+      //     "children" : theChildren,
+      //     "title" : node.title
+      //   };
+      // }
+
+      // If there is a url then this node is a bookmarked link.
+      if(node.url) {
+        return {
+          "id" : node.id,
+          "parentId" : node.parentId,
+          "title" : node.title,
+          "url" : node.url
+        };
+      }
+    }
 
     $scope.addCurrentWindow = function() {
       chrome.tabs.getSelected(null, function(currentTab) {

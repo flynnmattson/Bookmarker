@@ -24,7 +24,6 @@ app.factory('AuthService', ['Auth', 'ref', '$firebaseArray',
             ).then(function(authData) {
               // if successfull, user has been signed in to his/her account
               //currentUser = authData.uid;
-              console.log("User is logged in");
             }).catch(function(error) {
               // user could not be logged in
               window.location.href = './login.html';
