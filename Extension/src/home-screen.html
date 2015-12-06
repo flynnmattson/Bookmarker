@@ -23,7 +23,7 @@
   <body>
 
     <div ng-app="Bookmarker" ng-controller="HomeScreenCtrl" ng-init="loadButtons()">
-      <div ng-if="showHome" class="body-container home-container">
+      <div ng-show="showHome" class="body-container home-container">
         <br />
 
         <!-- Share form -->
@@ -94,9 +94,10 @@
       <!--PROFILE PAGE *** PROFILE PAGE *** PROFILE PAGE *** PROFILE PAGE *** PROFILE PAGE-->
       <!---->
       <!---->
-      <div ng-if="showProfile" class="body-container">
+      <div ng-show="showProfile" class="body-container">
 
         <div style="width:100%">
+          
           <img src="./images/backArrow.png" alt="Go back" ng-click="goBack()"
           style="width:60px; height:60px; padding-top:10px">
           <h3 align="right" style="float:right">{{profile.name}}</h3>

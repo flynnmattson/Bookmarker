@@ -23,18 +23,20 @@ app.controller('HomeScreenCtrl', ['$scope', '$rootScope', '$firebaseObject', '$f
 
       $firebaseArray(userRef).$loaded().then(function(data) {
         $scope.users = data;
-        console.log($scope.users);
         var found = false;
         for(var i = 0; i < $scope.users.length; i++)
         {
           if ($scope.users[i].name === searchName)
           {
-            //save user in service var to load in profile page
-            $scope.profile = $scope.users[i];
-            console.log($scope.profile);
-            found = true;
-            showHome = false;
-            showProfile = true;
+            if($scope.users[i].$id !== $scope.currentUser)
+            {
+              //save user in service var to load in profile page
+              $scope.profile = $scope.users[i];
+              console.log($scope.profile);
+              found = true;
+              $scope.showHome = false;
+              $scope.showProfile = true;
+            }
           }
         }
 
@@ -131,7 +133,6 @@ app.controller('HomeScreenCtrl', ['$scope', '$rootScope', '$firebaseObject', '$f
     /*Declare variables*/
     $scope.addButton = "";
     $scope.subscribeButton = "";
-    $scope.profile = "";
 
     $scope.loadButtons = function()
     {
@@ -172,7 +173,13 @@ app.controller('HomeScreenCtrl', ['$scope', '$rootScope', '$firebaseObject', '$f
       {
         $scope.addButton = "Cancel Request";
         /*place THIS person in OTHERS friend requests in db*/
+        var link = "https://de-bookmarker.firebaseio.com/users/" + $scope.profile.$id;
+        var userRef = new Firebase(link);
+        var key = $scope.currentUser;
 
+        userRef.child("friendRequests").child($scope.currentUser).update({
+          userID : $scope.currentUser
+        });
       }
       else if($scope.addButton == "Cancel Request")
       {
@@ -210,7 +217,8 @@ app.controller('HomeScreenCtrl', ['$scope', '$rootScope', '$firebaseObject', '$f
     /*Not quite working yet...not sure why*/
     $scope.goBack = function()
     {
-      window.location.href = './home-screen.html';
+      $scope.showProfile = false;
+      $scope.showHome = true;
     };
 
   }
