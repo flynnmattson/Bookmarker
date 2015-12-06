@@ -173,10 +173,12 @@ app.controller('HomeScreenCtrl', ['$scope', '$rootScope', '$firebaseObject', '$f
       {
         $scope.addButton = "Cancel Request";
         /*place THIS person in OTHERS friend requests in db*/
+        //grab the profile that is visted
         var link = "https://de-bookmarker.firebaseio.com/users/" + $scope.profile.$id;
         var userRef = new Firebase(link);
         var key = $scope.currentUser;
 
+        //add current person to other persons friend request list
         userRef.child("friendRequests").child($scope.currentUser).update({
           userID : $scope.currentUser
         });
