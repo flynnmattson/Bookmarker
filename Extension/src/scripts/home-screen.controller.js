@@ -5,8 +5,8 @@ app.controller('HomeScreenCtrl', ['$scope', '$rootScope', '$sce', '$q', '$fireba
 
     t = $scope;
     $scope.users = [];
-    $scope.hideProfile = true;
-    $scope.hideHome = false;
+    $scope.showProfile = false;
+    $scope.showHome = true;
 
     AuthService.isLoggedIn(),
     $scope.currentUser = AuthService.currentUser()
@@ -41,7 +41,7 @@ app.controller('HomeScreenCtrl', ['$scope', '$rootScope', '$sce', '$q', '$fireba
             obj: friend,
             label: $sce.trustAsHtml(
               '<div>'+
-                '<span class="glyphicon glyphicon-user" aria-hidden="true"></span> ' + 
+                '<span class="glyphicon glyphicon-user" aria-hidden="true"></span> ' +
                 highlight(friend.name,term) +
               '</div>'
             )
@@ -62,34 +62,28 @@ app.controller('HomeScreenCtrl', ['$scope', '$rootScope', '$sce', '$q', '$fireba
       $scope.friends = $firebaseArray(friendsRef);
     }
 
-
-    $scope.Search = function()
+    $scope.Search = function(searchName)
     {
       //see if searchitem is in database
       var link = "https://de-bookmarker.firebaseio.com/users";
       var userRef = new Firebase(link);
 
-      $scope.users = $firebaseArray(userRef);
-
-      $scope.users.$loaded().then(function()
-      {
+      $firebaseArray(userRef).$loaded().then(function(data) {
+        $scope.users = data;
         var found = false;
-        var user;
         for(var i = 0; i < $scope.users.length; i++)
         {
-          prompt("Entering for loop");
-          if ($scope.users[i].name === $scope.searchItem)
+          if ($scope.users[i].name === searchName)
           {
-            prompt("User found");
-            //save user in service var to load in profile page
-            $scope.profile = $scope.users[i];
-            console.log($scope.profile);
-            found = true;
-            hideHome = true;
-            hideProfile = false;
-          }
-          else {
-            prompt("User not found");
+            if($scope.users[i].$id !== $scope.currentUser)
+            {
+              //save user in service var to load in profile page
+              $scope.profile = $scope.users[i];
+              console.log($scope.profile);
+              found = true;
+              $scope.showHome = false;
+              $scope.showProfile = true;
+            }
           }
         }
 
@@ -186,7 +180,6 @@ app.controller('HomeScreenCtrl', ['$scope', '$rootScope', '$sce', '$q', '$fireba
     /*Declare variables*/
     $scope.addButton = "";
     $scope.subscribeButton = "";
-    $scope.profile = "";
 
     $scope.loadButtons = function()
     {
@@ -227,7 +220,15 @@ app.controller('HomeScreenCtrl', ['$scope', '$rootScope', '$sce', '$q', '$fireba
       {
         $scope.addButton = "Cancel Request";
         /*place THIS person in OTHERS friend requests in db*/
+        //grab the profile that is visted
+        var link = "https://de-bookmarker.firebaseio.com/users/" + $scope.profile.$id;
+        var userRef = new Firebase(link);
+        var key = $scope.currentUser;
 
+        //add current person to other persons friend request list
+        userRef.child("friendRequests").child($scope.currentUser).update({
+          userID : $scope.currentUser
+        });
       }
       else if($scope.addButton == "Cancel Request")
       {
@@ -265,7 +266,8 @@ app.controller('HomeScreenCtrl', ['$scope', '$rootScope', '$sce', '$q', '$fireba
     /*Not quite working yet...not sure why*/
     $scope.goBack = function()
     {
-      window.location.href = './home-screen.html';
+      $scope.showProfile = false;
+      $scope.showHome = true;
     };
 
   }
