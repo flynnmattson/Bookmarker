@@ -91,7 +91,13 @@
             <uib-accordion-heading ng-click="shared_with_me.open = !shared_with_me.open">
               Shared With Me <i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': shared_with_me.open, 'glyphicon-chevron-right': !shared_with_me.open}"></i>
             </uib-accordion-heading>
-            Your Inbox of bookmarks are here...
+            <div ng-repeat="node in sharedWithMe">
+              {{node.$id}}
+              <div ng-repeat="bookmark in node.sharedBookmarks">
+                <input type="checkbox" checklist-model="selectedBookmarks" checklist-value="bookmark">
+                <a ng-click="OpenBookmarkLink(bookmark.url)">{{bookmark.title}}</a>
+              </div>
+            </div>
           </uib-accordion-group>
 
           <!-- My Bookmarks -->
@@ -99,14 +105,16 @@
             <uib-accordion-heading ng-click="my_bookmarks.open = !my_bookmarks.open">
               My Bookmarks <i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': my_bookmarks.open, 'glyphicon-chevron-right': !my_bookmarks.open}"></i>
             </uib-accordion-heading>
-            <button ng-if="mybookmarks == null" type="button" class="btn btn-default btn-sm" ng-click="copyBookmarksFromChrome()">Sync Local Bookmarks!</button>
-            <div ng-repeat="bookmark in mybookmarks">
-                  <input type="checkbox" checklist-model="selectedBookmarks" checklist-value="bookmark">
-                  <a ng-click="OpenBookmarkLink(bookmark.url)">{{bookmark.title}}</a>
+            <div class="input-group" align="center">
+              <span class="input-group-btn">
+                <button type="button" class="btn btn-default btn-sm" ng-click="copyBookmarksFromChrome()">Sync Local Bookmarks!</button>
+                <button type="button" class="btn btn-default btn-sm" ng-click="addCurrentWindow()">Add Current Tab</button>
+              </span>
             </div>
-            <br/>
-            <div align="right">
-              <button type="button" class="btn btn-halfSize" ng-click="addCurrentWindow()">Add Current Tab</button>
+            <br />
+            <div ng-repeat="bookmark in mybookmarks">
+              <input type="checkbox" checklist-model="selectedBookmarks" checklist-value="bookmark">
+              <a ng-click="OpenBookmarkLink(bookmark.url)">{{bookmark.title}}</a>
             </div>
           </uib-accordion-group>
         </uib-accordion>

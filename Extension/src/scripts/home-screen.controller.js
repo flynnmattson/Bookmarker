@@ -49,9 +49,6 @@ app.controller('HomeScreenCtrl', ['$scope', '$rootScope', '$sce', '$q', '$fireba
     function select_friend(selected) {
       $scope.selectedFriends.push({id: selected.obj.$id, name: selected.value});
       $scope.shareInput.value = undefined;
-
-      console.log($scope.selectedFriends);
-      console.log($scope.selectedBookmarks);
     };
 
     // get the list of bookmarks for the current user
@@ -70,7 +67,6 @@ app.controller('HomeScreenCtrl', ['$scope', '$rootScope', '$sce', '$q', '$fireba
 
       $firebaseArray(sharesRef).$loaded().then(function(data) {
         $scope.sharedWithMe = data;
-        console.log($scope.sharedWithMe);
       });
     }
 
@@ -143,7 +139,7 @@ app.controller('HomeScreenCtrl', ['$scope', '$rootScope', '$sce', '$q', '$fireba
         $scope.selectedBookmarks.forEach(function(item){
           data.push(processNode(item));
         });
-        ref.child("shares").child($scope.selectedFriends[i].id).child($scope.currentUser).update(data);
+        ref.child("shares").child($scope.selectedFriends[i].id).child($scope.currentUser).child("sharedBookmarks").update(data);
       }
       $scope.selectedBookmarks = [];
       $scope.selectedFriends = [];
@@ -208,7 +204,6 @@ app.controller('HomeScreenCtrl', ['$scope', '$rootScope', '$sce', '$q', '$fireba
       if(node.url) {
         return {
           "id" : node.id,
-          "parentId" : node.parentId,
           "title" : node.title,
           "url" : node.url
         };
@@ -219,15 +214,7 @@ app.controller('HomeScreenCtrl', ['$scope', '$rootScope', '$sce', '$q', '$fireba
       chrome.tabs.query({active: true, currentWindow: true}, function(arrayOfTabs) {
        // since only one tab should be active and in the current window at once
        // the return variable should only have one entry
-       var activeTabName = arrayOfTabs[0].title;
-       var activeTabId = arrayOfTabs[0].id; // or do whatever you need
-       var activeTabUrl = arrayOfTabs[0].url;
-       var newBookmark = {
-         id : activeTabId,
-         title : activeTabName,
-         url : activeTabUrl
-       };
-       $scope.mybookmarks.$add(newBookmark);
+       $scope.mybookmarks.$add(processNode(arrayOfTabs[0]));
      });
     };
 
