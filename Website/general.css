@@ -63,6 +63,15 @@ h1 {
   text-decoration: none;
 }
 
+.signin-container {
+  background-color: rgba(255, 255, 255, 0.85);
+  margin-left: 25%;
+  margin-right: 25%;
+  margin-top: 5%;
+  width: 50%;
+  height: 10%;
+}
+
 .signout-container {
   float:right;
   text-align:right;

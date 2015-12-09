@@ -1,3 +1,16 @@
+var minib = angular.module('minib', ['ngRoute', 'firebase']);
+
+minib.run(function($rootScope, $location, $firebaseSimpleLogin, firebaseRef) {
+  $rootScope.auth = $firebaseSimpleLogin(firebaseRef());
+  $rootScope.auth.$getCurrentUser().then(function(user) {
+    if (user) {
+      $rootScope.currentUser = user;
+    } else {
+      $location.path('/login');
+    }
+  });
+});
+
 app.controller('LoginCtrl', ['$scope', 'Auth', 'ref',
     function($scope, Auth, ref) {
 
@@ -10,7 +23,7 @@ app.controller('LoginCtrl', ['$scope', 'Auth', 'ref',
       window.location = 'homepage.html';
     };
 
-    $scope.Login = function() {
+    $scope.login = function(){
       // clear all alert messages
       $scope.alerts = [];
 
