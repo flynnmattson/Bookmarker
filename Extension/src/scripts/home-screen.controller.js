@@ -229,25 +229,40 @@ app.controller('HomeScreenCtrl', ['$scope', '$rootScope', '$sce', '$q', '$fireba
 
     $scope.loadButtons = function()
     {
+      console.log("Inside load function");
       /*Conditions in if statements will be obtained from DB*/
 
-      /*Load ADD button*/
-      if(true) /*if person is NOT in friends list*/
+      var link = "https://de-bookmarker.firebaseio.com/users/" + $scope.currentUser + "/friends";
+      var friendsRef = new Firebase(link);
+      var isFriends = false;
+
+      $firebaseArray(friendsRef).$loaded().then(function(data) {
+        $scope.friends = data;
+        console.log($scope.friends);
+        for(var i = 0; i < $scope.friends.length; i++)
+        {
+            if($scope.friends[i].key === $scope.profile.$id) //if an id in my friends matches the profile I am visiting
+            {
+              isFriends = true;
+              $scope.addButton = "Remove";
+            }
+        }
+      });
+
+      if(isFriends === false)
       {
         $scope.addButton = "Add";
       }
-      else if(true) /* if person IS in friends list */
+
+      /*Load ADD button*//*
+      if(true) //if person is NOT in friends list
+      {
+        $scope.addButton = "Add";
+      }
+      else if(true) //if person IS in friends list
       {
         $scope.addButton = "Remove";
-      }
-      else if(true) /*if person is in friends REQUEST list*/
-      {
-        $scope.addButton = "Accept";
-      }
-      else if(true) /*if USER is in OTHER'S friend REQUEST list*/
-      {
-        $scope.addButton = "Cancel Request";
-      }
+      }*/
 
       /*Load SUBSCRIBE button*/
       if(true) /*if person is NOT in subscription list*/
@@ -264,34 +279,47 @@ app.controller('HomeScreenCtrl', ['$scope', '$rootScope', '$sce', '$q', '$fireba
     {
       if($scope.addButton == "Add")
       {
-        $scope.addButton = "Cancel Request";
+        $scope.addButton = "Remove";
         /*place THIS person in OTHERS friend requests in db*/
         //grab the profile that is visted
         var link = "https://de-bookmarker.firebaseio.com/users/" + $scope.profile.$id;
         var userRef = new Firebase(link);
         var key = $scope.currentUser;
 
-        //add current person to other persons friend request list
-        userRef.child("friendRequests").child($scope.currentUser).update({
-          userID : $scope.currentUser
+        //add current person to other persons friends
+        userRef.child("friends").child($scope.currentUser).set(true);
+        /*update({
+          key : $scope.currentUser
+        });*/
+
+        //add other person to current persons friends
+        link = "https://de-bookmarker.firebaseio.com/users/" + $scope.currentUser;
+        userRef = new Firebase(link);
+        key = $scope.profile.$id;
+
+        userRef.child("friends").child($scope.profile.$id).set(true);
+        /*update({
+          key : $scope.profile.$id
         });
-      }
-      else if($scope.addButton == "Cancel Request")
-      {
-        $scope.addButton = "Add";
-        /*remove THIS person from OTHERS friend requests in db*/
-      }
-      else if($scope.addButton == "Accept")
-      {
-        $scope.addButton = "Remove";
-        /* place THIS person in OTHERS friends in db*/
-        /* place OTHER person in THIS friends in db*/
+*/
       }
       else if($scope.addButton == "Remove")
       {
         $scope.addButton = "Add";
-        /* remove THIS person from OTHERS friends in db*/
-        /* remove OTHER person from THIS friends in db*/
+        /*remove THIS person from OTHERS friend requests in db*/
+        var link = "https://de-bookmarker.firebaseio.com/users/" + $scope.profile.$id;
+        var userRef = new Firebase(link);
+        var key = $scope.currentUser;
+
+        //remove current person from other persons friends
+        userRef.child("friends").child($scope.currentUser).remove();
+
+        //remove other person from current persons friends
+        link = "https://de-bookmarker.firebaseio.com/users/" + $scope.currentUser;
+        userRef = new Firebase(link);
+        key = $scope.profile.$id;
+
+        userRef.child("friends").child($scope.profile.$id).remove();
       }
     };
 
