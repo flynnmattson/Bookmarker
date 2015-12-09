@@ -56,8 +56,11 @@ app.controller('HomeScreenCtrl', ['$scope', '$rootScope', '$sce', '$q', '$fireba
 
     // get the list of bookmarks for the current user
     function getBookmarks(uid) {
-      var index = $scope.users.$indexFor(uid);
-      $scope.mybookmarks = $scope.users[index].bookmarks;
+      var bookmarksLink = "https://de-bookmarker.firebaseio.com/users/" + uid + "/bookmarks";
+      var bookmarksRef = new Firebase(bookmarksLink);
+      $firebaseArray(bookmarksRef).$loaded().then(function(bookmarks) {
+        $scope.mybookmarks = bookmarks;
+      });
     }
 
     // get the list of bookmarks shared with the current user
@@ -213,10 +216,24 @@ app.controller('HomeScreenCtrl', ['$scope', '$rootScope', '$sce', '$q', '$fireba
     }
 
     $scope.addCurrentWindow = function() {
-      chrome.tabs.getSelected(null, function(currentTab) {
-        console.log(currentTab);
-      });
+      chrome.tabs.query({active: true, currentWindow: true}, function(arrayOfTabs) {
+       // since only one tab should be active and in the current window at once
+       // the return variable should only have one entry
+       var activeTabName = arrayOfTabs[0].title;
+       var activeTabId = arrayOfTabs[0].id; // or do whatever you need
+       var activeTabUrl = arrayOfTabs[0].url;
+       var newBookmark = {
+         id : activeTabId,
+         title : activeTabName,
+         url : activeTabUrl
+       };
+       $scope.mybookmarks.$add(newBookmark);
+     });
     };
+
+      // chrome.tabs.getSelected(null, function(currentTab) {
+      //   console.log(currentTab);
+      // });
 
     //**************************************************************************
     //**************************************************************************

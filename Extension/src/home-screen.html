@@ -104,7 +104,10 @@
                   <input type="checkbox" checklist-model="selectedBookmarks" checklist-value="bookmark">
                   <a ng-click="OpenBookmarkLink(bookmark.url)">{{bookmark.title}}</a>
             </div>
-            <button ng-click="addcurrentWindow()">+</button>
+            <br/>
+            <div align="right">
+              <button type="button" class="btn btn-halfSize" ng-click="addCurrentWindow()">Add Current Tab</button>
+            </div>
           </uib-accordion-group>
         </uib-accordion>
       </div>
