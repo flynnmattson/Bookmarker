@@ -67,6 +67,11 @@ app.controller('HomeScreenCtrl', ['$scope', '$rootScope', '$sce', '$q', '$fireba
 
       $firebaseArray(sharesRef).$loaded().then(function(data) {
         $scope.sharedWithMe = data;
+
+        for(var i = 0; i < $scope.sharedWithMe.length; i++) {
+          var index = $scope.users.$indexFor($scope.sharedWithMe.$keyAt(i))
+          $scope.sharedWithMe[i].name = $scope.users[index].name;
+        }
       });
     }
 

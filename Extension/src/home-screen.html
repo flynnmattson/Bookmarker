@@ -91,9 +91,9 @@
             <uib-accordion-heading ng-click="shared_with_me.open = !shared_with_me.open">
               Shared With Me <i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': shared_with_me.open, 'glyphicon-chevron-right': !shared_with_me.open}"></i>
             </uib-accordion-heading>
-            <div ng-repeat="node in sharedWithMe">
-              {{node.$id}}
-              <div ng-repeat="bookmark in node.sharedBookmarks">
+            <div ng-repeat="sharedItem in sharedWithMe">
+              {{sharedItem.name}}
+              <div ng-repeat="bookmark in sharedItem.sharedBookmarks">
                 <input type="checkbox" checklist-model="selectedBookmarks" checklist-value="bookmark">
                 <a ng-click="OpenBookmarkLink(bookmark.url)">{{bookmark.title}}</a>
               </div>
