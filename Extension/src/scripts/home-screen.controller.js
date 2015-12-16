@@ -226,10 +226,13 @@ app.controller('HomeScreenCtrl', ['$scope', '$rootScope', '$sce', '$q', '$fireba
     /*Declare variables*/
     $scope.addButton = "";
     $scope.subscribeButton = "";
+    $scope.friendsList = [];
 
     $scope.loadButtons = function()
     {
       console.log("Inside load function");
+      $scope.friendsList = getFriends($scope.currentUser);
+      console.log($scope.friendsList);
       /*Conditions in if statements will be obtained from DB*/
 
       var link = "https://de-bookmarker.firebaseio.com/users/" + $scope.currentUser + "/friends";
