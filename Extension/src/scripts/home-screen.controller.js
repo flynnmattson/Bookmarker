@@ -1,7 +1,7 @@
 var t;
 
-app.controller('HomeScreenCtrl', ['$scope', '$rootScope', '$sce', '$q', '$firebaseObject', '$firebaseArray', 'Auth', 'ref', 'AuthService',
-  function($scope, $rootScope, $sce, $q, $firebaseObject, $firebaseArray, Auth, ref, AuthService) {
+app.controller('HomeScreenCtrl', ['$scope', '$rootScope', '$window', '$sce', '$q', '$firebaseObject', '$firebaseArray', 'Auth', 'ref', 'AuthService',
+  function($scope, $rootScope, $window, $sce, $q, $firebaseObject, $firebaseArray, Auth, ref, AuthService) {
 
     t = $scope;
     $scope.showProfile = false;
@@ -338,6 +338,11 @@ app.controller('HomeScreenCtrl', ['$scope', '$rootScope', '$sce', '$q', '$fireba
       $scope.showProfile = false;
       $scope.showHome = true;
     };
+
+    $scope.websiteRedirect = function()
+    {
+      $window.open(''); //doesn't really work now, just proof of concept
+    }
 
   }
 ]);
