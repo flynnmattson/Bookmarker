@@ -24,7 +24,7 @@
 
   <body>
 
-    <div ng-app="Bookmarker" ng-controller="HomeScreenCtrl" ng-init="loadButtons()">
+    <div ng-app="Bookmarker" ng-controller="HomeScreenCtrl">
       <div ng-show="showHome" class="body-container home-container">
         <br />
 
@@ -51,7 +51,9 @@
           </div>
         </form>
 
-        <!-- Search form -->
+
+
+        <!--Search form-->
         <form ng-if="selectedBookmarks.length == 0" class="form-group" ng-submit="Search(searchName)" >
           <div class="input-group">
             <input type="text" class="form-control" ng-model="searchName" placeholder="Search for friends">
@@ -114,7 +116,7 @@
       <!--PROFILE PAGE *** PROFILE PAGE *** PROFILE PAGE *** PROFILE PAGE *** PROFILE PAGE-->
       <!---->
       <!---->
-      <div ng-show="showProfile" class="body-container">
+      <div ng-show="showProfile" class="body-container home-container">
 
         <div style="width:100%">
 

@@ -121,6 +121,7 @@ app.controller('HomeScreenCtrl', ['$scope', '$rootScope', '$sce', '$q', '$fireba
               found = true;
               $scope.showHome = false;
               $scope.showProfile = true;
+              $scope.loadButtons();
             }
           }
         }
@@ -226,14 +227,12 @@ app.controller('HomeScreenCtrl', ['$scope', '$rootScope', '$sce', '$q', '$fireba
     /*Declare variables*/
     $scope.addButton = "";
     $scope.subscribeButton = "";
-    $scope.friendsList = [];
 
     $scope.loadButtons = function()
     {
       console.log("Inside load function");
-      $scope.friendsList = getFriends($scope.currentUser);
-      console.log($scope.friendsList);
-      /*Conditions in if statements will be obtained from DB*/
+
+      //Conditions in if statements will be obtained from DB
 
       var link = "https://de-bookmarker.firebaseio.com/users/" + $scope.currentUser + "/friends";
       var friendsRef = new Firebase(link);
@@ -241,13 +240,16 @@ app.controller('HomeScreenCtrl', ['$scope', '$rootScope', '$sce', '$q', '$fireba
 
       $firebaseArray(friendsRef).$loaded().then(function(data) {
         $scope.friends = data;
+        console.log("Friends");
         console.log($scope.friends);
+        console.log("Profile");
+        console.log($scope.profile);
         for(var i = 0; i < $scope.friends.length; i++)
         {
-            if($scope.friends[i].key === $scope.profile.$id) //if an id in my friends matches the profile I am visiting
+            console.log($scope.friends[i].$id);
+            if($scope.friends[i].$id == $scope.profile.$id)
             {
-              isFriends = true;
-              $scope.addButton = "Remove";
+              $scope.addButton = "Remove"
             }
         }
       });
@@ -256,16 +258,6 @@ app.controller('HomeScreenCtrl', ['$scope', '$rootScope', '$sce', '$q', '$fireba
       {
         $scope.addButton = "Add";
       }
-
-      /*Load ADD button*//*
-      if(true) //if person is NOT in friends list
-      {
-        $scope.addButton = "Add";
-      }
-      else if(true) //if person IS in friends list
-      {
-        $scope.addButton = "Remove";
-      }*/
 
       /*Load SUBSCRIBE button*/
       if(true) /*if person is NOT in subscription list*/
