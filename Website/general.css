@@ -14,7 +14,7 @@ body {
 h1 {
   max-width:100%;
   color: rgba(0, 0, 0);
-  font-family: "Harrington";
+  font-family: "Eras Light ITC";
   font-size: 50px;
   padding-bottom: 0px;
   padding-left: 100px;
@@ -28,6 +28,7 @@ h1 {
 
 h2{
   padding-top:5%;
+  font-family: "Eras Light ITC";
 }
 
 .seperator{
@@ -97,8 +98,10 @@ h2{
 
 .signout-container {
   float:right;
+  width: 40%;
   text-align:right;
-  padding-right: 0%;
+  padding-left: 20%;
+  padding-top: 2%;
   margin-top: 1%;
   margin-bottom: 0%;
   margin-right: 2%;
