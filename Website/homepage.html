@@ -1,7 +1,8 @@
 <!doctype html>
 <html lang="en">
   <head>
-    <title>Sign Into Bookmarker</title>
+    <link rel="icon" type="image/png" href="images/favicon-16x16.png" sizes="16x16">
+    <title>Bookmarker</title>
 
     <script src="libs/firebase.js"></script>
     <script src="libs/angular.min.js"></script>
@@ -23,61 +24,71 @@
 <div style="width:100%">
   <div class="accountmanagement-container">
     <ul>
-      <a href="createAccountPage.html"><font color="white" style="font-family:Century Gothic" size = "3">Create an account</font></a>
-      <font color="white" style="font-family:Century Gothic">&nbsp;&nbsp;Or&nbsp;</font>
-      <a href="signInPage.html"><font color="white" style="font-family:Century Gothic" size ="3">Want to manage your account?&nbsp; Log in</font></a>
+      <a href="createAccountPage.html"><font color="black" style="font-family:Eras Light ITC" size = "4">Create an account</font></a>
+      <font color="black" style="font-family:Eras Light ITC" size ="4">&nbsp;&nbsp;or&nbsp;&nbsp;</font>
+      <a href="signInPage.html"><font color="black" style="font-family:Eras Light ITC" size ="4">Want to manage your account?&nbsp; Log in</font></a>
       </ul>
     </div>
   </div>
 
   <!--Title div section-->
       <div class="bookmarkerheader-container">
-        <h1>Bookmarker</h1>
+        <h1><img src="images/Icon2.png" alt="logo"><font style= "font-family: Eras Light ITC">Bookmarker</font></h1>
         <a id="Home"></a>
       </div>
   <!--Navigation Bar-->
   <div class="navbar-container">
       <ul>
-        <a href="#GettingStarted"><font color="white" style="font-family:Century Gothic" size = "6">Getting Started</font></a>
+        <a href="#GettingStarted"><font color="black" style="font-family:Eras Light ITC" size = "5">Download</font></a>
       </ul>
     </div>
     <div class="navbar-container">
         <ul>
-          <a href="#HowItWorks"><font color="white" style="font-family:Century Gothic" size = "6">How It Works</font></a>
+          <a href="#HowItWorks"><font color="black" style="font-family:Eras Light ITC" size = "5">Learn to Use</font></a>
         </ul>
       </div>
     <div class="navbar-container">
         <ul>
-      <a href="#FAQ"><font color="white" style="font-family:Century Gothic" size = "6">FAQ</font></a>
+      <a href="#FAQ"><font color="black" style="font-family:Eras Light ITC" size = "5">FAQ</font></a>
     </ul>
   </div>
   <div class="navbar-container">
       <ul>
-      <a href="#AboutUs"><font color="white" style="font-family:Century Gothic" size = "6">About Us</font></a>
+      <a href="#AboutUs"><font color="black" style="font-family:Eras Light ITC" size = "5">About Us</font></a>
     </ul>
   </div>
 
   <!--Body container displays gray box-->
     <div class="body-container">
+      <div class = "seperator"></div>
   <!--Breakdown of each "page" section-->
   <!--Page 1-->
   <div id="Page1">
     <a id="GettingStarted"></a>
-    <h2 style="font-family:Century Gothic">Getting Started Page</h2>
-    <div style="background-image: url(images/flower.jpg);
-        height: 600px; width: 1600px; border: 1px solid white;">
+
+    <center><div style="background-image: url(images/flower.jpg);
+        margin-top:2%; height:600px; width: 80%;">
     <button type="button" class="btn btn-danger btn-size20 btn-margin2 btn-dlnow"
     ng-click="downloadExtension()">Download Now</button>
-   </div>
-    <a href="#Home" style ="text-decoration:none;font-family:Century Gothic">Go back to top
+  </div></center>
+  <div class = "seperator-white">
+    <p style="font-family:Eras Light ITC" color = "rgb(150,150,150);"><font size = "10">
+      "Sharing your favorites easily." </font></p>
+  </div>
+  <div class = "seperator"></div>
+   <h2 style="font-family:Eras Light ITC"><font size = "6">Getting Started</font></h2>
+   <p style="font-family:Eras Light ITC"><font size = "5">
+     Mark your favorite links.
+     Share with friends, and have them share with you.</font></p>
+    <a href="#Home" style ="text-decoration:none;font-family:Eras Light ITC">Go back to top
     </a>
   </div>
 
   <!--Page 2-->
   <div id="Page2">
     <a id="HowItWorks"></a>
-    <h2 style="font-family:Century Gothic">How It Works</h2>
-    <a href="#Home" style ="text-decoration:none;font-family:Century Gothic">Go back to top</a>
+    <h2 style="font-family:Eras Light ITC">Learn To Use Bookmarker</h2>
+    <a href="#Home" style ="text-decoration:none;font-family:Eras Light ITC">Go back to top</a>
   </div>
 
   <!--Page 3-->

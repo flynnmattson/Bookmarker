@@ -9,6 +9,7 @@
     <script src="libs/angular-route.min.js"></script>
     <script src="libs/angular-animate.js"></script>
     <script src="libs/jquery-2.1.4.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ngStorage/0.3.6/ngStorage.min.js"></script>
     <script src="libs/ui-bootstrap-tpls-0.14.3.min.js"></script>
     <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.19/angular-cookies.js"></script>
     <script src="app.js"></script>
@@ -16,16 +17,16 @@
 
 
     <link href="css/bootstrap.css" rel="stylesheet">
-    <link href="css/general.css" rel="stylesheet">
+    <link href="general.css" rel="stylesheet">
 
   </head>
 
   <body>
-
-    <div class="body-container">
+    <div class="signin-container">
 
       <h3>Sign In</h3>
 
+      <div style = "margin-top: 5%; margin-bottom: 5%;"></div>
       <div ng-app="Bookmarker" ng-controller="LoginCtrl">
 
           <!-- Alerts -->
@@ -34,23 +35,22 @@
           </div>
 
           <!-- Login form -->
-          <form class="form-group" ng-submit="Login()" >
+          <form class="form-group" ng-submit="login()">
 
-            <input type="text" class="form-control" ng-model="email" placeholder="example@bookmarker.com"/>
-
-            <div class="row">
-              <div class="col-xs-9">
+            <div style = "margin-left: 10%;" class="row">
+              <div class="col-xs-10" style = "margin-bottom:1%;">
+                <input type="text" class="form-control" ng-model="email" placeholder="example@bookmarker.com"/>
+             </div>
+              <div class="col-xs-10" style = "margin-bottom:5%;">
                 <input type="password" class="form-control" ng-model="password" placeholder="********"/>
               </div>
             </div>
 
             <br />
             <div align="center">
-              <button type="submit" class="btn btn-danger btn-fullSize btn-margin2 btn-signin">Sign In</button>
-              <!-- <button type="button" class="btn btn-default btn-size49 btn-margin2 btn-google">Google</button>
-              <button type="button" class="btn btn-primary btn-size49 btn-margin2 btn-facebook">Facebook</button> -->
+              <button type="submit" class="btn btn-danger btn-halfSize btn-margin2 btn-signin">Sign In</button>
+              <button type="button" class="btn btn-default btn-halfSize btn-margin2" ng-click="cancel()">Cancel</button>
             </div>
-            <button type="button" class="btn btn-default btn-fullSize btn-margin2" ng-click="cancel()">Cancel</button>
           </form>
 
         <h5 class="h5-narrow">New to Bookmarker? <a href="./create-account.html">Create an account now</a>.</h5>

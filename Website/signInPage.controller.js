@@ -1,3 +1,4 @@
+
 app.controller('LoginCtrl', ['$scope', 'Auth', 'ref',
     function($scope, Auth, ref) {
 
@@ -10,7 +11,7 @@ app.controller('LoginCtrl', ['$scope', 'Auth', 'ref',
       window.location = 'homepage.html';
     };
 
-    $scope.Login = function() {
+    $scope.login = function(){
       // clear all alert messages
       $scope.alerts = [];
 
@@ -30,8 +31,9 @@ app.controller('LoginCtrl', ['$scope', 'Auth', 'ref',
           // if successfull, user has been signed in to his/her account
           // store the Firebase authentication token for this session
           //$cookies.put('AUTH_TOKEN', authData.token);
-          // redirect user to the home screen
-          window.location.href = 'dashboard.html';
+          // window.localStorage.set("AUTH_TOKEN", authData.token);
+          // // redirect user to the home screen
+          // window.location.href = 'dashboard.html';
 
         }).catch(function(error) {
           // user could not be logged in
