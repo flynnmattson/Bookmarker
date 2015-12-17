@@ -100,84 +100,47 @@
     <h3 style="font-family:Lucida Sans Unicode; margin-left:5px">Getting Started</h3>
     <!--Angular accordion trial-->
     <uib-accordion close-others="true">
-      <!-- My Subscriptions -->
-      <uib-accordion-group panel-class="panel-my-subscriptions"  is-open="my_subscriptions.open">
-        <uib-accordion-heading ng-click="my_subscriptions.open = !my_subscriptions.open">
-          I'm not familiar with Google Extensions, how can I get Bookmarker running? <i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': my_subscriptions.open, 'glyphicon-chevron-right': !my_subscriptions.open}"></i>
+
+      <uib-accordion-group panel-class="panel-Extensions"  is-open="Extensions.open">
+        <uib-accordion-heading ng-click="Extensions.open = !Extensions.open">
+          I'm not familiar with Google Extensions, how can I get Bookmarker running? <i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': Extensions.open, 'glyphicon-chevron-right': !Extensions.open}"></i>
         </uib-accordion-heading>
         You can easily download the extension from our website's homepage. The extension is also available from Google Chrome's collection of extensions.
       </uib-accordion-group>
 
-      <uib-accordion-group panel-class="panel-my-subscriptions"  is-open="my_subscriptions.open">
-        <uib-accordion-heading ng-click="my_subscriptions.open = !my_subscriptions.open">
-          What is a live feed? <i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': my_subscriptions.open, 'glyphicon-chevron-right': !my_subscriptions.open}"></i>
+      <uib-accordion-group panel-class="panel-liveFeed"  is-open="liveFeed.open">
+        <uib-accordion-heading ng-click="liveFeed.open = !liveFeed.open">
+          What is a live feed? <i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': liveFeed.open, 'glyphicon-chevron-right': !liveFeed.open}"></i>
         </uib-accordion-heading>
         A live feed is a place for you to share and see the latest and hottest links. The live feed is meant
     to filled with current and interesting links users would like to share with everyone.
       </uib-accordion-group>
 
-      <div class="accordionItem">
-        <h2 style="font-family:Lucida Sans Unicode; font-size:16px">I'm not familiar with Google Extensions, how can I get Bookmarker running?</h2>
-        <div>
-          <p style="font-family:Lucida Sans Unicode; font-size:14px">You can easily download the extension from our website's homepage. The extension is also available from Google Chrome's collection of extensions.</p>
-        </div>
-      </div>
-
-      <div class="accordionItem">
-        <h2 style="font-family:Lucida Sans Unicode; font-size:16px">What is a live feed?</h2>
-        <div>
-          <p style="font-family:Lucida Sans Unicode; font-size:14px">A live feed is a place for you to share and see the latest and hottest links. The live feed is meant
-      to filled with current and interesting links users would like to share with everyone.</p>
-        </div>
-      </div>
       <h3 style="font-family:Lucida Sans Unicode; margin-left:5px">Account Management</h3>
-      <uib-accordion-group panel-class="panel-my-subscriptions"  is-open="my_subscriptions.open">
-        <uib-accordion-heading ng-click="my_subscriptions.open = !my_subscriptions.open">
-          How can I manage my account settings from within the extension? <i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': my_subscriptions.open, 'glyphicon-chevron-right': !my_subscriptions.open}"></i>
+      <uib-accordion-group panel-class="panel-settings"  is-open="settings.open">
+        <uib-accordion-heading ng-click="settings.open = !settings.open">
+          How can I manage my account settings from within the extension? <i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': settings.open, 'glyphicon-chevron-right': !settings.open}"></i>
         </uib-accordion-heading>
-        Unfortunately, users can't currently manage their accounts from within the extension. Our team is working
-    hard to add this feature. For now, you can manage your account by clicking on the settings button at the
+        You can manage your account by clicking on the settings button at the
     bottom of the home screen. You will be redirected to the Bookmarker.com website, where you can manage your account.
       </uib-accordion-group>
-      <div class="accordionItem">
-        <h2 style="font-family:Lucida Sans Unicode; font-size:16px">How can I manage my account settings from within the extension?</h2>
-        <div>
-          <p style="font-family:Lucida Sans Unicode; font-size:14px">Unfortunately, users can't currently manage their accounts from within the extension. Our team is working
-      hard to add this feature. For now, you can manage your account by clicking on the settings button at the
-      bottom of the home screen. You will be redirected to the Bookmarker.com website, where you can manage your account.</p>
-        </div>
-      </div>
 
       <h3 style="font-family:Lucida Sans Unicode; margin-left:5px">Editing Bookmarks</h3>
-      <uib-accordion-group panel-class="panel-my-subscriptions"  is-open="my_subscriptions.open">
-        <uib-accordion-heading ng-click="my_subscriptions.open = !my_subscriptions.open">
-          How can I delete multiple links at one time? <i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': my_subscriptions.open, 'glyphicon-chevron-right': !my_subscriptions.open}"></i>
+      <uib-accordion-group panel-class="panel-delete"  is-open="delete.open">
+        <uib-accordion-heading ng-click="delete.open = !delete.open">
+          How can I delete multiple links at one time? <i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': delete.open, 'glyphicon-chevron-right': !delete.open}"></i>
         </uib-accordion-heading>
         To delete multiple links, simply select the links to be deleted by checking the corresponding boxes and
       click on the trash can at the bottom of the page.
       </uib-accordion-group>
 
-      <uib-accordion-group panel-class="panel-my-subscriptions"  is-open="my_subscriptions.open">
-        <uib-accordion-heading ng-click="my_subscriptions.open = !my_subscriptions.open">
-          How can I edit a bookmark? <i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': my_subscriptions.open, 'glyphicon-chevron-right': !my_subscriptions.open}"></i>
+      <uib-accordion-group panel-class="panel-edit"  is-open="edit.open">
+        <uib-accordion-heading ng-click="edit.open = !edit.open">
+          How can I edit a bookmark? <i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': edit.open, 'glyphicon-chevron-right': !edit.open}"></i>
         </uib-accordion-heading>
         Editing bookmarks is easy with Bookmarker. Simply click on the edit button (insert small button image?)
     corresponding to the bookmark you want to edit. A popup will appear where you can rename the bookmark.
       </uib-accordion-group>
-      <div class="accordionItem">
-        <h2 style="font-family:Lucida Sans Unicode; font-size:16px">How can I delete multiple links at one time?</h2>
-        <div>
-          <p style="font-family:Lucida Sans Unicode; font-size:14px">To delete multiple links, simply select the links to be deleted by checking the corresponding boxes and
-        click on the trash can at the bottom of the page.</p>
-        </div>
-      </div>
-      <div class="accordionItem">
-        <h2 style="font-family:Lucida Sans Unicode; font-size:16px">How can I edit a bookmark?</h2>
-        <div>
-          <p style="font-family:Lucida Sans Unicode; font-size:14px">Editing bookmarks is easy with Bookmarker. Simply click on the edit button (insert small button image?)
-      corresponding to the bookmark you want to edit. A popup will appear where you can rename the bookmark.</p>
-        </div>
-      </div>
   <!--End accordion trial-->
 
     <a href="#Home" style ="text-decoration:none;font-family:Lucida Sans Unicode">Go back to top</a>
