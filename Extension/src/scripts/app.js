@@ -1,4 +1,4 @@
-var app = angular.module('Bookmarker', ['ngRoute', 'ngAnimate', 'ui.bootstrap', 'checklist-model', 'firebase', 'ngSanitize', 'MassAutoComplete']);
+var app = angular.module('Bookmarker', ['ngRoute', 'ngAnimate', 'ui.bootstrap', 'ui.tree', 'checklist-model', 'firebase', 'ngSanitize', 'MassAutoComplete']);
 
 app.factory('ref', [
   function() {

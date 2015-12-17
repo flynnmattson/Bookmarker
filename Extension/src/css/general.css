@@ -121,6 +121,18 @@ body {
   margin-top: 2px;
 }
 
+.btn-collapse-swm {
+  background-color: rgb(160, 180, 0);
+  border-color: white;
+  color: white;
+}
+
+.btn-delete-bkmr {
+  background-color: rgba(0, 0, 0, 0);
+  color: rgb(210, 210, 210);
+  border: 0;
+}
+
 /*CSS Stuff added for Profile Page*/
 .btn-add {
   background-color:rgb(51, 0, 51);;
