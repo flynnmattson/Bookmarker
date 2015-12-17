@@ -15,7 +15,12 @@ body {
 }
 
 .home-container {
-    width: 350px;
+  width: 350px;
+}
+
+.profile-container {
+  position: relative;
+  padding-bottom: 15px;
 }
 
 .footer-container {
@@ -133,15 +138,37 @@ body {
   border: 0;
 }
 
-/*CSS Stuff added for Profile Page*/
-.btn-add {
-  background-color:rgb(51, 0, 51);;
+.btn-goBack {
+  background-color: rgba(40, 40, 40, 0.80);
+  padding-left: 3px;
+  padding-right: 3px;
+  height: 80px !important;
+  color:white;
   border-color: gray;
-  color:while;
+}
+
+.btn-goBack:hover {
+  background-color: white !important;
+  left: 0px;
+  color: black;
+}
+
+.btn-addFriend {
+  background-color: rgb(160, 180, 0);
+  border-color: gray;
+  color:white;
 }
 
 .btn-subscribe {
-  background-color:rgb(51, 0, 51);;
+  background-color: rgb(0, 140, 170);
   border-color: gray;
-  color:while;
+  color:white;
+}
+
+.img-profile {
+  position: absolute;
+  left: 110px;
+  top: 22px;
+  width:80px;
+  height:80px;
 }

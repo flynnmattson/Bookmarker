@@ -88,6 +88,7 @@ app.controller('HomeScreenCtrl', ['$scope', '$rootScope', '$sce', '$q', '$fireba
           console.log($scope.profile);
           $scope.showHome = false;
           $scope.showProfile = true;
+          loadButtons();
       }
       $scope.searchInput.value = undefined;
     };
@@ -279,94 +280,90 @@ app.controller('HomeScreenCtrl', ['$scope', '$rootScope', '$sce', '$q', '$fireba
     $scope.addButton = "";
     $scope.subscribeButton = "";
 
-    $scope.loadButtons = function()
-    {
-      /*Conditions in if statements will be obtained from DB*/
+    function loadButtons() {
 
-      /*Load ADD button*/
-      if(true) /*if person is NOT in friends list*/
-      {
+      var isFriends = false;
+      console.log($scope.profile);
+      console.log($scope.friends);
+
+      var index = $scope.friends.$indexFor($scope.profile.$id);
+      if(index != -1) {
+        if($scope.friends[index].$id == $scope.profile.$id)
+          $scope.addButton = "Remove";
+      } else {
         $scope.addButton = "Add";
-      }
-      else if(true) /* if person IS in friends list */
-      {
-        $scope.addButton = "Remove";
-      }
-      else if(true) /*if person is in friends REQUEST list*/
-      {
-        $scope.addButton = "Accept";
-      }
-      else if(true) /*if USER is in OTHER'S friend REQUEST list*/
-      {
-        $scope.addButton = "Cancel Request";
       }
 
       /*Load SUBSCRIBE button*/
-      if(true) /*if person is NOT in subscription list*/
-      {
+      if(true) {
+        /*if person is NOT in subscription list*/
         $scope.subscribeButton = "Subscribe";
-      }
-      else if(true)
-      {
+      } else if(false)      {
         $scope.subscribeButton = "Unsubscribe";
       }
     };
 
     $scope.updateAddButton = function()
     {
-      if($scope.addButton == "Add")
-      {
-        $scope.addButton = "Cancel Request";
-        /*place THIS person in OTHERS friend requests in db*/
-        //grab the profile that is visted
+      if($scope.addButton == "Add") {
+
+        $scope.addButton = "Remove";
+        // place THIS person in OTHERS friend requests in db
+        // grab the profile that is visted
         var link = "https://de-bookmarker.firebaseio.com/users/" + $scope.profile.$id;
         var userRef = new Firebase(link);
         var key = $scope.currentUser;
 
-        //add current person to other persons friend request list
-        userRef.child("friendRequests").child($scope.currentUser).update({
-          userID : $scope.currentUser
-        });
-      }
-      else if($scope.addButton == "Cancel Request")
-      {
+        // add current person to other persons friends
+        userRef.child("friends").child($scope.currentUser).set(true);
+
+        // add other person to current persons friends
+        link = "https://de-bookmarker.firebaseio.com/users/" + $scope.currentUser;
+        userRef = new Firebase(link);
+        key = $scope.profile.$id;
+
+        userRef.child("friends").child($scope.profile.$id).set(true);
+
+      } else if($scope.addButton == "Remove") {
+
         $scope.addButton = "Add";
-        /*remove THIS person from OTHERS friend requests in db*/
-      }
-      else if($scope.addButton == "Accept")
-      {
-        $scope.addButton = "Remove";
-        /* place THIS person in OTHERS friends in db*/
-        /* place OTHER person in THIS friends in db*/
-      }
-      else if($scope.addButton == "Remove")
-      {
-        $scope.addButton = "Add";
-        /* remove THIS person from OTHERS friends in db*/
-        /* remove OTHER person from THIS friends in db*/
+        // remove THIS person from OTHERS friend requests in db
+        var link = "https://de-bookmarker.firebaseio.com/users/" + $scope.profile.$id;
+        var userRef = new Firebase(link);
+        var key = $scope.currentUser;
+
+        // remove current person from other persons friends
+        userRef.child("friends").child($scope.currentUser).remove();
+
+        // remove other person from current persons friends
+        link = "https://de-bookmarker.firebaseio.com/users/" + $scope.currentUser;
+        userRef = new Firebase(link);
+        key = $scope.profile.$id;
+
+        userRef.child("friends").child($scope.profile.$id).remove();
       }
     };
 
     $scope.updateSubscribeButton = function()
     {
-      if($scope.subscribeButton == "Subscribe")
-      {
+      if($scope.subscribeButton == "Subscribe") {
         $scope.subscribeButton = "Unsubscribe";
-        /* place OTHER in THIS person's subscriptions*/
+        // place OTHER in THIS person's subscriptions
       }
-      else if($scope.subscribeButton == "Unsubscribe")
-      {
+      else if($scope.subscribeButton == "Unsubscribe") {
         $scope.subscribeButton = "Subscribe";
-        /* remove OTHER from THIS person's subscriptions*/
+        // remove OTHER from THIS person's subscriptions
       }
     };
 
-    /*Not quite working yet...not sure why*/
-    $scope.goBack = function()
-    {
+    // go back to the home screen
+    $scope.goBack = function() {
       $scope.showProfile = false;
       $scope.showHome = true;
     };
 
+    $scope.websiteRedirect = function() {
+      $window.open('https://de-bookmarker.firebaseio.com'); //doesn't really work now, just proof of concept
+    }
   }
 ]);
