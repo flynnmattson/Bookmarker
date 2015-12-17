@@ -363,7 +363,7 @@ app.controller('HomeScreenCtrl', ['$scope', '$rootScope', '$sce', '$q', '$fireba
     };
 
     $scope.websiteRedirect = function() {
-      $window.open('https://de-bookmarker.firebaseio.com'); //doesn't really work now, just proof of concept
+      chrome.tabs.create({"url":"file:///Users/Dalia/Documents/Autumn%202015/CSS490/Bookmarker/Website/homepage.html?"}); //doesn't really work now, just proof of concept
     }
   }
 ]);
